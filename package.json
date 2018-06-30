@@ -6,22 +6,21 @@
     "author": "attilagyongyosi <attilagyongyosi0@gmail.com>",
     "license": "UNLICENSED",
     "private": false,
-
     "scripts": {
+        "clean": "rimraf ./dist",
         "lint": "tslint -p tsconfig.json",
-        "build": "yarn lint && tsc"
+        "build": "yarn lint && yarn clean && tsc"
     },
-
     "husky": {
         "hooks": {
             "pre-commit": "yarn lint",
             "pre-push": "yarn build"
         }
     },
-
     "devDependencies": {
         "@types/node": "10.5.1",
         "husky": "0.14.3",
+        "rimraf": "2.6.2",
         "tslint": "5.10.0",
         "typescript": "2.9.2"
     }
