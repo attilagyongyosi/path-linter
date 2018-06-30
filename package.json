@@ -19,7 +19,7 @@
     },
     "devDependencies": {
         "@types/node": "10.5.1",
-        "husky": "0.14.3",
+        "husky": "1.0.0-rc.9",
         "rimraf": "2.6.2",
         "tslint": "5.10.0",
         "typescript": "2.9.2"
