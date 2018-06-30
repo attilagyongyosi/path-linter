@@ -1,0 +1,44 @@
+{
+    "rules": {
+        "indent": [
+            true,
+            "spaces",
+            4
+        ],
+        "class-name": true,
+        "max-file-line-count": [
+            true,
+            200
+        ],
+        "max-line-length": [
+            true,
+            140
+        ],
+        "max-classes-per-file": [
+            true,
+            1
+        ],
+        "eofline": true,
+        "cyclomatic-complexity": [
+            true,
+            7
+        ],
+        "no-trailing-whitespace": true,
+        "no-any": true,
+        "no-var-requires": true,
+        "no-unnecessary-callback-wrapper": true,
+        "no-unused-variable": true,
+        "curly": true,
+        "quotemark": [
+            true,
+            "single"
+        ],
+        "triple-equals": true,
+        "semicolon": true,
+        "encoding": true,
+        "interface-over-type-literal": true,
+        "no-unused-expression": true,
+        "space-within-parens": false,
+        "no-duplicate-super": true
+    }
+}
