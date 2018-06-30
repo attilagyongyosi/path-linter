@@ -1,0 +1,10 @@
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Distribution
+dist/
+
+# Dependencies
+node_modules/
