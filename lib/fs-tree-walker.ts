@@ -10,25 +10,25 @@ export class FsTreeWalker {
     public walk(directory: string): void {
         fs.readdir(directory, (error, files) => {
             if (error) { this.config.onErrorCallback(error); }
-
             this.numberOfFiles += files.length;
+            files.forEach(file => { this.stat(directory, file); });
+        });
+    }
 
-            files.forEach((file) => {
-                fs.stat(path.join(directory, file), (error, stats) => {
-                    if (error) { this.config.onErrorCallback(); }
+    private stat(directory: string, file: string): void {
+        fs.stat(path.join(directory, file), (error, stats) => {
+            if (error) { this.config.onErrorCallback(); }
 
-                    if (stats.isDirectory()) {
-                        this.walk(file);
-                    } else if (stats.isFile()) {
-                        this.config.onFileCallback(file);
+            if (stats.isDirectory()) {
+                this.walk(file);
+            } else if (stats.isFile()) {
+                this.config.onFileCallback(file);
 
-                        this.numberOfFiles--;
-                        if (this.numberOfFiles === 0) {
-                            this.config.onFinishCallback();
-                        }
-                    }
-                });
-            });
+                this.numberOfFiles--;
+                if (this.numberOfFiles === 0) {
+                    this.config.onFinishCallback();
+                }
+            }
         });
     }
 }
