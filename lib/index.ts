@@ -1,4 +1,4 @@
-import { Linter } from './linter';
+import { Linter } from './linter/linter';
 import { FsTreeWalker } from './fs-tree-walker';
 
 const linter = new Linter();
