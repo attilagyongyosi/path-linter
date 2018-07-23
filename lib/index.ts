@@ -1,8 +1,8 @@
 import { Linter } from './linter/linter';
-import { FsTreeWalker } from './fs-tree-walker';
+import { FileSystemWalker } from './file-system-walker/file-system-walker';
 
 const linter = new Linter();
-const walker = new FsTreeWalker({
+const walker = new FileSystemWalker({
     onFileCallback: (file: string) => {
         if (!linter.lint(file)) {
             console.error(`Path ${file} does not comply to regex!`);
