@@ -1,22 +1,35 @@
-import { Linter } from './linter/linter';
+import { ConfigReader } from './config/configReader';
+import { Config } from './config/config';
 import { FileSystemWalker } from './file-system-walker/file-system-walker';
+import { Linter } from './linter/linter';
 
-const linter = new Linter();
-const walker = new FileSystemWalker({
-    onFileCallback: (file: string) => {
-        if (!linter.lint(file)) {
-            console.error(`Path ${file} does not comply to regex!`);
-            process.exit(2);
-        }
-    },
-    onErrorCallback: (error: Error) => {
-        console.error('An unexpected error occured!', error.message);
-        throw error;
-    },
-    onFinishCallback: () => {
-        console.log('All files pass.');
-        process.exit(0);
-    }
+const args = process.argv;
+
+if (!args || args.length < 3) {
+    console.error('No configuration file given!');
+    process.exit(1);
+}
+
+let config: Config = {};
+
+try {
+    config = ConfigReader.read(args[2]);
+} catch(error) {
+    console.error(error.message);
+    process.exit(2);
+}
+
+Object.keys(config).forEach((directory) => {
+    const linter = new Linter(config[directory]);
+
+    new FileSystemWalker({
+        onFinishCallback: () => console.log('Linting finished'),
+        onFileCallback: (file) => {
+            if (!linter.lint(file)) {
+                console.error(`Failed to lint ${file}`);
+                process.exitCode = 1;
+            }
+        },
+        onErrorCallback: () => console.error
+    }).walk(directory);
 });
-
-walker.walk(process.argv[2] || __dirname);
