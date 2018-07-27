@@ -3,7 +3,7 @@ import { FileSystemWalkerConfig } from '../file-system-walker-config';
 
 describe('FileSystemWalker', () => {
     const CONFIG: FileSystemWalkerConfig = {
-        onFileCallback: (file: string) => { return; },
+        onFileCallback: () => {},
         onFinishCallback: () => {},
         onErrorCallback: console.error
     };
