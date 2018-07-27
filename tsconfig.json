@@ -1,7 +1,9 @@
 {
-    "include": [ "./lib/**/*.ts" ],
+    "include": [
+        "./src/**/*.ts"
+    ],
     "compilerOptions": {
-        "outDir": "./dist",
+        "outDir": "./lib",
         "target": "es5",
         "module": "commonjs",
         "strict": true,
