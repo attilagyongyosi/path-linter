@@ -4,7 +4,7 @@
 .vscode/
 
 # Distribution
-dist/
+lib/
 
 # Dependencies
 node_modules/
