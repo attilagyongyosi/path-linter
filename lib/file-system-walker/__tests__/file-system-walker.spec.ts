@@ -1,5 +1,5 @@
-import { FileSystemWalker } from '../lib/file-system-walker/file-system-walker';
-import { FileSystemWalkerConfig } from '../lib/file-system-walker/file-system-walker-config';
+import { FileSystemWalker } from '../file-system-walker';
+import { FileSystemWalkerConfig } from '../file-system-walker-config';
 
 describe('FileSystemWalker', () => {
     const CONFIG: FileSystemWalkerConfig = {

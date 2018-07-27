@@ -16,7 +16,7 @@ try {
     config = ConfigReader.read(args[2]);
 } catch(error) {
     console.error(error.message);
-    process.exit(2);
+    process.exit(1);
 }
 
 Object.keys(config).forEach((directory) => {
