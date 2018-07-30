@@ -23,10 +23,10 @@ Object.keys(config).forEach((directory) => {
     const linter = new Linter(config[directory]);
 
     new FileSystemWalker({
-        onFinishCallback: () => console.log('Linting finished'),
+        onFinishCallback: () => console.log(`Linting finished in ${directory}.`),
         onFileCallback: (file) => {
             if (!linter.lint(file)) {
-                console.error(`Failed to lint ${file}`);
+                console.error(`Failed to lint ${file}!`);
                 process.exitCode = 1;
             }
         },
