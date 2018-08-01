@@ -2,7 +2,7 @@
     "name": "path-linter",
     "version": "0.1.0",
     "description": "Linter for consistent directory and file naming",
-    "main": "lib/index.js",
+    "main": "lib/main.js",
     "author": "attilagyongyosi <attilagyongyosi0@gmail.com>",
     "license": "UNLICENSED",
     "private": false,
@@ -10,8 +10,9 @@
         "clean": "rimraf ./lib",
         "lint": "tslint -p tsconfig.json",
         "build": "yarn lint && yarn clean && webpack --config ./webpack.config.ts",
-        "test": "jest",
-        "test:integration": "yarn build && yarn test integration"
+        "test:unit": "jest",
+        "test:integration": "yarn build && jest -c jest.integration.config.json",
+        "test": "yarn test:unit && yarn test:integration"
     },
     "husky": {
         "hooks": {

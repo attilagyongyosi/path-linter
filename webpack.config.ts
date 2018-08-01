@@ -5,7 +5,7 @@ const CONFIG: Configuration = {
     mode: 'production',
     target: 'node',
     entry: {
-        lib: './src/index.ts'
+        main: './src/index.ts'
     },
     output: {
         path: path.join(__dirname, 'lib')

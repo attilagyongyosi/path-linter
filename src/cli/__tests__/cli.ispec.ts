@@ -2,7 +2,7 @@ import { fork } from 'child_process';
 import * as path from 'path';
 
 const run = (args: string[], callback: Function) => {
-    const cli = fork(path.join('lib', 'lib'), args, { silent: true });
+    const cli = fork(path.join('lib', 'main'), args, { silent: true });
 
     let stdoutBuffer = '';
     let stderrBuffer = '';
