@@ -11,7 +11,7 @@
         "lint": "tslint -p tsconfig.json",
         "build": "yarn lint && yarn clean && webpack --config ./webpack.config.ts",
         "test:unit": "jest",
-        "test:integration": "yarn build && jest -c jest.integration.config.json",
+        "test:integration": "yarn build && jest -c jest.integration.config.js",
         "test": "yarn test:unit && yarn test:integration"
     },
     "husky": {
