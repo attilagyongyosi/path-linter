@@ -10,7 +10,8 @@
         "clean": "rimraf ./lib",
         "lint": "tslint -p tsconfig.json",
         "build": "yarn lint && yarn clean && webpack --config ./webpack.config.ts",
-        "test": "jest"
+        "test": "jest",
+        "test:integration": "yarn build && yarn test integration"
     },
     "husky": {
         "hooks": {
