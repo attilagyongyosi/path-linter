@@ -11,6 +11,7 @@ if (!args || args.length < 3) {
 }
 
 let config: Config = {};
+let filesLinted: number = 0;
 
 try {
     config = ConfigReader.read(args[2]);
@@ -23,13 +24,20 @@ Object.keys(config).forEach((directory) => {
     const linter = new Linter(config[directory]);
 
     new FileSystemWalker({
-        onFinishCallback: () => console.log(`Linting finished in ${directory}.`),
+        onFinishCallback: () => {
+            console.log(`Linting finished in ${directory}.`);
+            console.log(`Linted ${filesLinted} files.`);
+        },
         onFileCallback: (file) => {
+            filesLinted++;
             if (!linter.lint(file)) {
                 console.error(`Failed to lint ${file}!`);
                 process.exitCode = 1;
             }
         },
-        onErrorCallback: () => console.error
+        onErrorCallback: (error) => {
+            console.error(error.message);
+            process.exit(1);
+        }
     }).walk(directory);
 });

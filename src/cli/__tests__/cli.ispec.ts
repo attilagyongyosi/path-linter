@@ -30,4 +30,22 @@ describe('CLI', () => {
             done();
         });
     });
+
+    it('should lint kebab-correct folder', (done) => {
+        run([ 'test/kebab-config.json' ], (code: number, stdout: string, stderr: string) => {
+            expect(code).toBe(0);
+            expect(stderr).toBe('');
+            expect(stdout).toContain('Linted 4 files.');
+            done();
+        });
+    });
+
+    it('should fail with 1 linting error in should-fail folder', (done) => {
+        run([ 'test/should-fail-config.json' ], (code: number, stdout: string, stderr: string) => {
+            expect(code).toBe(1);
+            expect(stdout).toContain('Linted 3 files.');
+            expect(stderr).toContain('Failed to lint');
+            done();
+        });
+    });
 });
