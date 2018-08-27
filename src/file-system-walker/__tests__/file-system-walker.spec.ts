@@ -17,7 +17,7 @@ describe('FileSystemWalker', () => {
     it('should call function when encountering files', (done) => {
         spyOn(walker.walkerConfig, 'onFileCallback').and.callThrough();
         spyOn(walker.walkerConfig, 'onFinishCallback').and.callFake(() => {
-            expect(walker.walkerConfig.onFileCallback).toHaveBeenCalledTimes(4);
+            expect(walker.walkerConfig.onFileCallback).toHaveBeenCalledTimes(7);
             done();
         });
 

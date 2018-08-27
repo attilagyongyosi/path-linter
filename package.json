@@ -11,6 +11,7 @@
         "lint": "tslint -p tsconfig.json",
         "build": "yarn lint && yarn clean && webpack --config ./webpack.config.ts",
         "build:watch": "yarn build -w",
+        "test-run": "yarn build && node lib/main.js --config sample-config.json",
         "test:unit": "jest",
         "test:integration": "yarn build && jest -c jest.integration.config.js",
         "test": "yarn test:unit && yarn test:integration"

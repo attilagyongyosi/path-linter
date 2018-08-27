@@ -1,9 +1,9 @@
 import { CliOptions } from '../cli/cli-options';
-import { COLORS } from '../util/color-codes';
+import { deColorize, green, red } from '../util/color-codes';
 
 export class Logger {
-    private readonly infoPrefix = `[${COLORS.GREEN}info${COLORS.RESET}] `;
-    private readonly errorPrefix = `[${COLORS.RED}error${COLORS.RESET}] `;
+    private readonly infoPrefix = `[${green('info')}] `;
+    private readonly errorPrefix = `[${red('error')}] `;
 
     constructor(private options: CliOptions) {}
 
@@ -17,20 +17,10 @@ export class Logger {
 
     private log(message: string): void {
         if (!this.options.colorize) {
-            console.log(this.deColorize(message));
+            console.log(deColorize(message));
         } else {
             console.log(message);
         }
-    }
-
-    private deColorize(message: string): string {
-        let replaced = message;
-
-        Object.values(COLORS).forEach((value: string) => {
-            replaced = replaced.replace(value, '');
-        });
-
-        return replaced;
     }
 
 }
