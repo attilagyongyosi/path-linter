@@ -1,3 +1,4 @@
-export interface CliOptions {
-    colorize: boolean;
+export class CliOptions {
+    colorize?: boolean = false;
+    configFile: string = '';
 }

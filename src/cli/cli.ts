@@ -5,29 +5,23 @@ import { Linter } from '../linter/linter';
 import { CliOptions } from './cli-options';
 import { Logger } from '../logger/logger';
 import { blue, green } from '../util/color-codes';
+import { processCliOptions } from './cli-options-processor';
 
-const args = process.argv;
-
-const options: CliOptions = {
-    colorize: args.includes('--colorize')
-};
-
-const cliLogger = new Logger(options);
-
-if (!args || !args.includes('--config')) {
-    cliLogger.error('Missing configuration file!');
+let cliOptions: CliOptions = new CliOptions();
+try {
+    cliOptions = processCliOptions(process.argv);
+} catch (cliOptionsError) {
+    console.error(cliOptionsError.message);
     process.exit(1);
 }
+
+const cliLogger = new Logger(cliOptions);
 
 let config: Config = {};
 let filesLinted: number = 0;
 
 try {
-    const configPathArg = args[args.indexOf('--config') + 1];
-    if (!configPathArg) {
-        cliLogger.error('Missing configuration file!');
-        process.exit(1);
-    }
+    const configPathArg = cliOptions.configFile;
     config = ConfigReader.read(configPathArg);
 } catch(error) {
     cliLogger.error(error.message);
