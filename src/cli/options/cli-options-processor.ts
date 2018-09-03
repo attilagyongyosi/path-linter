@@ -31,7 +31,7 @@ export const CLI_OPTIONS_MESSAGES = {
  * @todo    config option should have a fallback default value
  */
 export function processCliOptions(cliArgs: string[]): CliOptions {
-    if (!cliArgs) {
+    if (!cliArgs || !cliArgs.length) {
         throw Error(CLI_OPTIONS_MESSAGES.noArgs);
     }
 

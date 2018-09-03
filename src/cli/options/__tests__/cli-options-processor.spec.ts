@@ -1,7 +1,16 @@
-import { processCliOptions } from '../cli-options-processor';
+import { CLI_OPTIONS_MESSAGES, processCliOptions } from '../cli-options-processor';
 import { CliOptions } from '../cli-options';
 
 describe('CLI Options Processor', () => {
+    it('should fail when no arguments are supplied', () => {
+        try {
+            processCliOptions([]);
+        } catch (error) {
+            expect(error).toBeDefined();
+            expect(error.message).toBe(CLI_OPTIONS_MESSAGES.noArgs);
+        }
+    });
+
     it('should fail when configuration argument is missing', () => {
         let args: string[] = [
             'test/server.js',
@@ -14,7 +23,7 @@ describe('CLI Options Processor', () => {
             processCliOptions(args);
         } catch (error) {
             expect(error).toBeDefined();
-            expect(error.message).toContain('--config');
+            expect(error.message).toBe(CLI_OPTIONS_MESSAGES.noConfig);
         }
     });
 

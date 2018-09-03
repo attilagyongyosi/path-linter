@@ -15,15 +15,15 @@ export class FileSystemWalker {
         return this.walkDirectory(root);
     }
 
-    private walkDirectory(parentPath: string, directory: string = ''): void {
-        const currentPath = path.join(parentPath, directory);
+    private walkDirectory(parentPath: string): void {
+        const currentPath = path.join(parentPath);
 
         fs.readdir(currentPath, (error, files = []) => {
-            if (error) { this.config.onErrorCallback(error); }
+            if (error) { return this.config.onErrorCallback(error); }
 
             if (this.numberOfFiles) { --this.numberOfFiles; }
 
-            this.numberOfFiles += files ? files.length : 0;
+            this.numberOfFiles += files.filter(file => file !== '.gitkeep').length;
 
             if (this.numberOfFiles === 0) {
                 return this.config.onFinishCallback();
@@ -37,16 +37,14 @@ export class FileSystemWalker {
 
     private stat(path: string): void {
         fs.stat(path, (error, stats) => {
-            if (error) { this.config.onErrorCallback(error); }
+            if (error) { return this.config.onErrorCallback(error); }
 
             if (stats.isDirectory()) {
                 return this.walk(path);
             }
 
-            if (stats.isFile()) {
-                this.config.onFileCallback(path);
-                --this.numberOfFiles;
-            }
+            this.config.onFileCallback(path);
+            --this.numberOfFiles;
 
             if (this.numberOfFiles === 0) {
                 return this.config.onFinishCallback();
