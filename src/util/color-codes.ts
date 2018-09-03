@@ -1,8 +1,16 @@
+/**
+ * Special regular expression that matches ANSI escape
+ * sequences.
+ */
 const ANSI_REGEX = [
     '[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:[a-zA-Z\\d]*(?:;[a-zA-Z\\d]*)*)?\\u0007)',
     '(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PRZcf-ntqry=><~]))'
 ].join('|');
 
+/**
+ * Colors (ANSI escape sequences) used
+ * by path-linter.
+ */
 export const COLORS = {
     GREEN: '\x1b[32m',
     BLUE: '\x1b[1m\x1b[34m',

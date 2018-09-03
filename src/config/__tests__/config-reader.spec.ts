@@ -1,7 +1,7 @@
 import * as path from 'path';
 
 import { Config } from '../config';
-import { ConfigReader } from '../configReader';
+import { ConfigReader } from '../config-reader';
 
 const context = (fileName: string) => path.join(__dirname, fileName);
 

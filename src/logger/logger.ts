@@ -1,11 +1,20 @@
-import { CliOptions } from '../cli/cli-options';
+import { CliOptions } from '../cli/options/cli-options';
 import { deColorize, green, red } from '../util/color-codes';
 
+/**
+ * Provides advanced console logging capabilities
+ * for path-linter.
+ *
+ * For instance, it can output colorized log messages
+ * based on a supplied instance of {@link CliOptions}.
+ *
+ * @author  attilagyongyosi
+ */
 export class Logger {
     private readonly infoPrefix = `[${green('info')}] `;
     private readonly errorPrefix = `[${red('error')}] `;
 
-    constructor(private options: CliOptions) {}
+    constructor(public options: CliOptions = new CliOptions()) {}
 
     public info(message: string): void {
         this.log(`${this.infoPrefix}${message}`);
