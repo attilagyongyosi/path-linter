@@ -2,11 +2,29 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { FileSystemWalkerConfig } from './file-system-walker-config';
 
+/**
+ * Instances of this class can be used to walk
+ * through a directory recursively and visit every file.
+ *
+ * @author  attilagyongyosi
+ * @todo    optional gitkeep filtering only for unit tests
+ */
 export class FileSystemWalker {
+
+    /**
+     * Inner counter to keep track if we've visited
+     * every file in the given folder recursively.
+     */
     private numberOfFiles: number = 0;
 
     constructor(private config: FileSystemWalkerConfig) {}
 
+    /**
+     * Returns with the current configuration object
+     * for this instance.
+     *
+     * Primarily for unit testing purposes.
+     */
     get walkerConfig(): FileSystemWalkerConfig {
         return this.config;
     }
