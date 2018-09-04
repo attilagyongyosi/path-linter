@@ -56,9 +56,24 @@ Example:
 You can also find an example in [sample-config.json](sample-config.json).
 
 ## Usage
-```bash
-npm run path-linter --config your-config-file.json
+Wire it into your NPM scripts in `package.json`.  
+For example:
+```json
+{
+    "scripts": {
+        "lint:paths": "path-linter --config some-config.json --colorize"
+    }
+}
 ```
+Then you can execute it with  
+```bash
+npm run lint:paths
+```
+or
+```bash
+yarn lint:paths
+```
+
 `--config <path>`  
 Specifies the relative path to a configuration file. Required.
 
