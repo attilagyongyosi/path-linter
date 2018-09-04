@@ -13,11 +13,11 @@ describe('CLI Logger', () => {
     });
 
     it('should display an error message', () => {
-        spyOn(console, 'log').and.callThrough();
+        spyOn(console, 'error').and.callThrough();
         LOG.error('Message');
 
-        expect(console.log).toHaveBeenCalledTimes(1);
-        expect(console.log).toHaveBeenCalledWith('[error] Message');
+        expect(console.error).toHaveBeenCalledTimes(1);
+        expect(console.error).toHaveBeenCalledWith('[error] Message');
     });
 
     it('should display colorized message', () => {
