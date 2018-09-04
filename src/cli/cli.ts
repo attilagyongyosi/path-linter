@@ -1,6 +1,6 @@
 import { ConfigReader } from '../config/config-reader';
 import { Config } from '../config/config';
-import { FileSystemWalker } from '../file-system-walker/file-system-walker';
+import { FileVisitor } from '../file-visitor/file-visitor';
 import { Linter } from '../linter/linter';
 import { CliOptions } from './options/cli-options';
 import { Logger } from '../logger/logger';
@@ -43,22 +43,23 @@ function execute(): void {
         const linter = new Linter(directoryRegex);
 
         LOG.info(`Started linting ${blue(directory)}...`);
-        new FileSystemWalker({
-            onFinishCallback: () => {
+        new FileVisitor({
+            onFinish: () => {
                 LOG.info(`Finished linting ${blue(directory)}!`);
                 LOG.info(`Linted ${green(filesLinted + '')} files.`);
             },
-            onFileCallback: (file) => {
+            onFile: (file) => {
                 filesLinted++;
                 if (!linter.lint(file)) {
                     LOG.error(`${blue(file)} does not match ${directoryRegex}!`);
                     process.exitCode = 1;
                 }
             },
-            onErrorCallback: (error) => {
+            onError: (error) => {
                 LOG.error(error.message);
                 process.exit(1);
-            }
+            },
+            ignoreFiles: []
         }).walk(directory);
     });
 }

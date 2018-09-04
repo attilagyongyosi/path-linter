@@ -1,15 +1,15 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import { FileSystemWalkerConfig } from './file-system-walker-config';
+import { FileVisitorConfig } from './file-visitor-config';
 
 /**
  * Instances of this class can be used to walk
  * through a directory recursively and visit every file.
  *
  * @author  attilagyongyosi
- * @todo    optional gitkeep filtering only for unit tests
+ * @see     FileVisitorConfig
  */
-export class FileSystemWalker {
+export class FileVisitor {
 
     /**
      * Inner counter to keep track if we've visited
@@ -17,7 +17,7 @@ export class FileSystemWalker {
      */
     private numberOfFiles: number = 0;
 
-    constructor(private config: FileSystemWalkerConfig) {}
+    constructor(private config: FileVisitorConfig) {}
 
     /**
      * Returns with the current configuration object
@@ -25,7 +25,7 @@ export class FileSystemWalker {
      *
      * Primarily for unit testing purposes.
      */
-    get walkerConfig(): FileSystemWalkerConfig {
+    get visitorConfig(): FileVisitorConfig {
         return this.config;
     }
 
@@ -37,36 +37,36 @@ export class FileSystemWalker {
         const currentPath = path.join(parentPath);
 
         fs.readdir(currentPath, (error, files = []) => {
-            if (error) { return this.config.onErrorCallback(error); }
+            if (error) { return this.config.onError(error); }
 
             if (this.numberOfFiles) { --this.numberOfFiles; }
 
-            files = files.filter(file => file !== '.gitkeep');
-            this.numberOfFiles += files.length;
+            files = files.filter(file => !this.config.ignoreFiles.includes(file));
 
+            this.numberOfFiles += files.length;
             if (this.numberOfFiles === 0) {
-                return this.config.onFinishCallback();
+                return this.config.onFinish();
             }
 
             files.forEach(file => {
-                this.stat(path.join(currentPath, file));
+                this.visit(path.join(currentPath, file));
             });
         });
     }
 
-    private stat(path: string): void {
+    private visit(path: string): void {
         fs.stat(path, (error, stats) => {
-            if (error) { return this.config.onErrorCallback(error); }
+            if (error) { return this.config.onError(error); }
 
             if (stats.isDirectory()) {
                 return this.walk(path);
             }
 
-            this.config.onFileCallback(path);
+            this.config.onFile(path);
             --this.numberOfFiles;
 
             if (this.numberOfFiles === 0) {
-                return this.config.onFinishCallback();
+                return this.config.onFinish();
             }
         });
     }
