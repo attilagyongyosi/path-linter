@@ -27,7 +27,6 @@
         "no-any": true,
         "no-var-requires": true,
         "no-unnecessary-callback-wrapper": true,
-        "no-unused-variable": true,
         "curly": true,
         "quotemark": [
             true,
