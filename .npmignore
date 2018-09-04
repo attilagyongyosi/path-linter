@@ -1,0 +1,9 @@
+.editorconfig
+*.iml
+/.idea/
+/src/
+/test/
+/generated/
+*.lock
+*.ts
+*.js*
