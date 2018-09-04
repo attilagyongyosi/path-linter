@@ -1,3 +1,5 @@
+[![NPM version](https://badge.fury.io/js/path-linter.svg)](http://badge.fury.io/js/path-linter)
+
 # path-linter
 Lightweight, zero-dependency library to lint file paths in a project.
 
