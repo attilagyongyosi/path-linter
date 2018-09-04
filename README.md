@@ -16,10 +16,18 @@ For a while, I also wanted to do some open source project on my own, just for th
 of trying myself in this game.  
 So here it is!
 
-It is currently **6kb in size**, comes with **no dependencies**. The size could be smaller, I sacrificed it a bit on the altar 
+It is currently **~6kb in size**, comes with **no dependencies**. The size could be smaller, I sacrificed it a bit on the altar 
 of structural well-being.
 
 Enjoy!
+
+## Neat things
+* ~6kb package size
+* no dependencies
+* supports file extension linting
+* supports different naming convention per folder
+* did I say it's flexible? It uses regular expressions, after all
+* 100% test coverage
 
 ## Installing
 `path-linter` should be added as a `devDependency`:
