@@ -1,7 +1,7 @@
 import * as path from 'path';
-import { Configuration } from 'webpack';
+import * as webpack from 'webpack';
 
-const CONFIG: Configuration = {
+const CONFIG: webpack.Configuration = {
     mode: 'production',
     target: 'node',
     entry: {
@@ -18,7 +18,13 @@ const CONFIG: Configuration = {
             test: /\.ts$/,
             loader: 'awesome-typescript-loader'
         }]
-    }
+    },
+    plugins: [
+        new webpack.BannerPlugin({
+            banner: '#!/usr/bin/env node',
+            raw: true
+        })
+    ]
 };
 
 export default CONFIG;

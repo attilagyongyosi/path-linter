@@ -4,12 +4,20 @@
     "description": "Linter for consistent directory and file naming",
     "main": "lib/main.js",
     "author": "attilagyongyosi <attilagyongyosi0@gmail.com>",
-    "license": "UNLICENSED",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/attilagyongyosi/path-linter"
+    },
+    "bugs": {
+        "url": "https://github.com/attilagyongyosi/path-linter/issues"
+    },
+    "homepage": "https://github.com/attilagyongyosi/path-linter",
     "private": false,
     "scripts": {
         "clean": "rimraf ./lib",
         "lint": "tslint -p tsconfig.json",
-        "build": "yarn lint && yarn clean && webpack --config ./webpack.config.ts",
+        "build": "yarn lint && yarn clean && webpack --config ./webpack.config.ts && chmod +x lib/main.js",
         "build:watch": "yarn build -w",
         "test-run": "yarn build && node lib/main.js --config sample-config.json",
         "test:unit": "jest",
