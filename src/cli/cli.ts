@@ -19,10 +19,10 @@ execute();
 
 function parseArguments(): void {
     try {
-        cliOptions = processCliOptions(process.argv);
+        cliOptions = processCliOptions(process.argv.slice(2));
         LOG.options = cliOptions;
     } catch (cliOptionsError) {
-        console.error(cliOptionsError.message);
+        LOG.error(cliOptionsError.message);
         process.exit(1);
     }
 }
@@ -32,7 +32,7 @@ function readConfiguration(): void {
         const configPathArg = cliOptions.configFile;
         configuration = ConfigReader.read(configPathArg);
     } catch(error) {
-        LOG.error(error.message);
+        LOG.error(`Failed to read configuration file! Reason: ${error.message}`);
         process.exit(1);
     }
 }

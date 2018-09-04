@@ -17,18 +17,20 @@ export class Logger {
     constructor(public options: CliOptions = new CliOptions()) {}
 
     public info(message: string): void {
-        this.log(`${this.infoPrefix}${message}`);
+        this.log('info', `${this.infoPrefix}${message}`);
     }
 
     public error(message: string): void {
-        this.log(`${this.errorPrefix}${message}`);
+        this.log('error', `${this.errorPrefix}${message}`);
     }
 
-    private log(message: string): void {
-        if (!this.options.colorize) {
-            console.log(deColorize(message));
+    private log(level: string, message: string): void {
+        let newMessage = this.options.colorize ? message : deColorize(message);
+
+        if (level === 'info') {
+            console.info(newMessage);
         } else {
-            console.log(message);
+            console.error(newMessage);
         }
     }
 

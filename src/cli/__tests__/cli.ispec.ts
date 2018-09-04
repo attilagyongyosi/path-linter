@@ -1,5 +1,6 @@
 import { fork } from 'child_process';
 import * as path from 'path';
+import { CLI_OPTIONS_MESSAGES } from '../options/cli-options-processor';
 
 interface RunOutput {
     code: number;
@@ -24,23 +25,23 @@ describe('CLI', () => {
     it('should show error when no configuration file was given', (done) => {
         run([]).then(output => {
             expect(output.code).toBe(1);
-            expect(output.stderr).toContain('No configuration file given!');
+            expect(output.stderr).toContain(CLI_OPTIONS_MESSAGES.noArgs);
             expect(output.stdout).toBe('');
             done();
         });
     });
 
     it('should halt when configuration file can not be read', (done) => {
-        run([ 'non-existing.json' ]).then(output => {
+        run([ '--config', 'non-existing.json' ]).then(output => {
             expect(output.code).toBe(1);
-            expect(output.stderr).not.toBeFalsy();
+            expect(output.stderr).toContain('Failed to read configuration');
             expect(output.stdout).toBe('');
             done();
         });
     });
 
     it('should lint kebab-correct folder', (done) => {
-        run([ 'test/kebab-config.json' ]).then(output => {
+        run([ '--config', 'test/kebab-config.json' ]).then(output => {
             expect(output.code).toBe(0);
             expect(output.stderr).toBe('');
             expect(output.stdout).toContain('Linted 4 files.');
@@ -49,10 +50,10 @@ describe('CLI', () => {
     });
 
     it('should fail with 1 linting error in should-fail folder', (done) => {
-        run([ 'test/should-fail-config.json' ]).then(output => {
+        run([ '--config', 'test/should-fail-config.json' ]).then(output => {
             expect(output.code).toBe(1);
             expect(output.stdout).toContain('Linted 3 files.');
-            expect(output.stderr).toContain('Failed to lint');
+            expect(output.stderr).toContain('does not match');
             done();
         });
     });

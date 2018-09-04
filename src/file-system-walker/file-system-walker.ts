@@ -41,7 +41,8 @@ export class FileSystemWalker {
 
             if (this.numberOfFiles) { --this.numberOfFiles; }
 
-            this.numberOfFiles += files.filter(file => file !== '.gitkeep').length;
+            files = files.filter(file => file !== '.gitkeep');
+            this.numberOfFiles += files.length;
 
             if (this.numberOfFiles === 0) {
                 return this.config.onFinishCallback();
