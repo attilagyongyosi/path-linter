@@ -4,7 +4,7 @@ import { FileVisitor } from '../file-visitor/file-visitor';
 import { Linter } from '../linter/linter';
 import { CliOptions } from './options/cli-options';
 import { Logger } from '../logger/logger';
-import { blue, green } from '../util/color-codes';
+import { blue, cyan, green } from '../util/color-codes';
 import { processCliOptions } from './options/cli-options-processor';
 
 const LOG = new Logger();
@@ -51,7 +51,7 @@ function execute(): void {
             onFile: (file) => {
                 filesLinted++;
                 if (!linter.lint(file)) {
-                    LOG.error(`${blue(file)} does not match ${directoryRegex}!`);
+                    LOG.error(`${blue(file)} does not match ${cyan(directoryRegex.source)}!`);
                     process.exitCode = 1;
                 }
             },

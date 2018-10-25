@@ -13,7 +13,8 @@ const ANSI_REGEX = [
  */
 export const COLORS = {
     GREEN: '\x1b[32m',
-    BLUE: '\x1b[1m\x1b[34m',
+    BLUE: '\x1b[94m',
+    CYAN: '\x1b[36m',
     RED: '\x1b[31m',
     RESET: '\x1b[0m'
 };
@@ -28,6 +29,10 @@ export function red(text: string): string {
 
 export function blue(text: string): string {
     return `${COLORS.BLUE}${text}${COLORS.RESET}`;
+}
+
+export function cyan(text: string): string {
+    return `${COLORS.CYAN}${text}${COLORS.RESET}`;
 }
 
 export function deColorize(message: string): string {
