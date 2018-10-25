@@ -4,7 +4,7 @@ import { FileVisitor } from '../file-visitor/file-visitor';
 import { Linter } from '../linter/linter';
 import { CliOptions } from './options/cli-options';
 import { Logger } from '../logger/logger';
-import { blue, cyan, green } from '../util/color-codes';
+import { blue, cyan, green, red } from '../util/color-codes';
 import { processCliOptions } from './options/cli-options-processor';
 
 const LOG = new Logger();
@@ -42,17 +42,24 @@ function execute(): void {
         const directoryRegex = configuration[directory];
         const linter = new Linter(directoryRegex);
 
+        let failedPaths: number = 0;
+
         LOG.info(`Started linting ${blue(directory)}...`);
         new FileVisitor({
             onFinish: () => {
                 LOG.info(`Finished linting ${blue(directory)}!`);
-                LOG.info(`Linted ${green(filesLinted + '')} files.`);
+                if (!failedPaths) {
+                    LOG.info(`Linted ${green(filesLinted + '')} file(s), no errors.`);
+                } else {
+                    LOG.info(`Linted ${green(filesLinted + '')} file(s), ${red('' + failedPaths)} didn't match pattern.`);
+                }
             },
             onFile: (file) => {
                 filesLinted++;
                 if (!linter.lint(file)) {
                     LOG.error(`${blue(file)} does not match ${cyan(directoryRegex.source)}!`);
                     process.exitCode = 1;
+                    failedPaths++;
                 }
             },
             onError: (error) => {
