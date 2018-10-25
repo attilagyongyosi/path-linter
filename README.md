@@ -75,7 +75,8 @@ yarn lint:paths
 ```
 
 `--config <path>`  
-Specifies the relative path to a configuration file. Required.
+Specifies the relative path to a configuration file. If not specified, the library will try to look up a 
+`path-linter.json` file in the project root.
 
 `--colorize`  
 Enables colorization for the console output.
