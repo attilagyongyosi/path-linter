@@ -1,12 +1,12 @@
 import { CliOptions } from './cli-options';
 import { CliSwitches } from './cli-switches.enum';
 
+export const DEFAULT_CONFIG_FILE_PATH: string = './path-linter.json';
+
 /**
  * Error messages for the CLI Options Processor function.
  */
 export const CLI_OPTIONS_MESSAGES = {
-    noArgs: `Invalid command arguments! At least ${CliSwitches.CONFIG} is required!`,
-    noConfig: `No ${CliSwitches.CONFIG} option supplied!`,
     invalidConfig: `Invalid configuration file path. Forgot to specify after ${CliSwitches.CONFIG}?`
 };
 
@@ -27,27 +27,24 @@ export const CLI_OPTIONS_MESSAGES = {
  *
  * @see     CliOptions
  * @see     CliSwitches
- *
- * @todo    config option should have a fallback default value
  */
 export function processCliOptions(cliArgs: string[]): CliOptions {
-    if (!cliArgs || !cliArgs.length) {
-        throw Error(CLI_OPTIONS_MESSAGES.noArgs);
-    }
-
     const configOptionIndex = cliArgs.indexOf(CliSwitches.CONFIG);
 
+    let configFilePath: string = '';
+
     if (configOptionIndex === -1) {
-        throw new Error(CLI_OPTIONS_MESSAGES.noConfig);
+        configFilePath = DEFAULT_CONFIG_FILE_PATH;
+    } else {
+        configFilePath = cliArgs[configOptionIndex + 1];
     }
 
-    let configFile: string = cliArgs[configOptionIndex + 1];
-    if (!configFile || configFile.startsWith('--')) {
+    if (!configFilePath || configFilePath.startsWith('--')) {
         throw new Error(CLI_OPTIONS_MESSAGES.invalidConfig);
     }
 
     return {
         colorize: cliArgs.includes(CliSwitches.COLORIZE),
-        configFile: configFile
+        configFile: configFilePath
     };
 }

@@ -9,6 +9,7 @@
         "lint": "tslint -p tsconfig.json",
         "build": "yarn lint && yarn clean && webpack --config ./webpack.config.ts && chmod +x lib/main.js",
         "build:watch": "yarn build -w",
+        "test-run:default": "yarn build && node lib/main.js",
         "test-run": "yarn build && node lib/main.js --config sample-config.json",
         "test:unit": "jest",
         "test:integration": "yarn build && jest -c jest.integration.config.js",

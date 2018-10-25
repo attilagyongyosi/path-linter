@@ -1,0 +1,4 @@
+{
+  "lib": "^[a-z|_|\\.|\\-|\\\\|/]+\\.(ts|js|html|scss|json)$",
+  "test": ".*\\.json"
+}

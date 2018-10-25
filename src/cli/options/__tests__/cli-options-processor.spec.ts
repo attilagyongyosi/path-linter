@@ -1,17 +1,8 @@
-import { CLI_OPTIONS_MESSAGES, processCliOptions } from '../cli-options-processor';
+import { DEFAULT_CONFIG_FILE_PATH, processCliOptions } from '../cli-options-processor';
 import { CliOptions } from '../cli-options';
 
 describe('CLI Options Processor', () => {
-    it('should fail when no arguments are supplied', () => {
-        try {
-            processCliOptions([]);
-        } catch (error) {
-            expect(error).toBeDefined();
-            expect(error.message).toBe(CLI_OPTIONS_MESSAGES.noArgs);
-        }
-    });
-
-    it('should fail when configuration argument is missing', () => {
+    it('should fall back to default when configuration argument is missing', () => {
         let args: string[] = [
             'test/server.js',
             '--colorize',
@@ -19,12 +10,8 @@ describe('CLI Options Processor', () => {
             'whatever'
         ];
 
-        try {
-            processCliOptions(args);
-        } catch (error) {
-            expect(error).toBeDefined();
-            expect(error.message).toBe(CLI_OPTIONS_MESSAGES.noConfig);
-        }
+        const options: CliOptions = processCliOptions(args);
+        expect(options.configFile).toBe(DEFAULT_CONFIG_FILE_PATH);
     });
 
     it('should fail when no configuration file path is given', () => {
