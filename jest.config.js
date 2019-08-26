@@ -1,13 +1,13 @@
 module.exports = {
-    rootDir: ".",
+    rootDir: '.',
     moduleDirectories: [
-        "node_modules",
-        "lib"
+        'node_modules',
+        'lib'
     ],
     transform: {
-        "^.+\\.ts$": "ts-jest"
+        '^.+\\.ts$': 'ts-jest'
     },
     collectCoverage: true,
-    coverageDirectory: "./generated/jest-coverage",
-    coverageReporters: [ "html", "text-summary" ]
+    coverageDirectory: './generated/jest-coverage',
+    coverageReporters: ['html', 'text-summary']
 };
