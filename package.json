@@ -1,6 +1,6 @@
 {
     "name": "path-linter",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Linter for consistent directory and file naming",
     "main": "lib/main.js",
     "author": "attilagyongyosi <attilagyongyosi0@gmail.com>",
