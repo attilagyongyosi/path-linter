@@ -13,10 +13,6 @@ let cliOptions: CliOptions = new CliOptions();
 let configuration: Config = {};
 let filesLinted: number = 0;
 
-parseArguments();
-readConfiguration();
-execute();
-
 function parseArguments(): void {
     try {
         cliOptions = processCliOptions(process.argv.slice(2));
@@ -46,7 +42,7 @@ function execute(): void {
 
         LOG.info(`Started linting ${blue(directory)}...`);
         new FileVisitor({
-            onFinish: () => {
+            onFinish: (): void => {
                 LOG.info(`Finished linting ${blue(directory)}!`);
                 if (!failedPaths) {
                     LOG.info(`Linted ${green(filesLinted + '')} file(s), no errors.`);
@@ -54,7 +50,7 @@ function execute(): void {
                     LOG.info(`Linted ${green(filesLinted + '')} file(s), ${red('' + failedPaths)} didn't match pattern.`);
                 }
             },
-            onFile: (file) => {
+            onFile: (file): void => {
                 filesLinted++;
                 if (!linter.lint(file)) {
                     LOG.error(`${blue(file)} does not match ${cyan(directoryRegex.source)}!`);
@@ -62,7 +58,7 @@ function execute(): void {
                     failedPaths++;
                 }
             },
-            onError: (error) => {
+            onError: (error): void => {
                 LOG.error(error.message);
                 process.exit(1);
             },
@@ -70,3 +66,7 @@ function execute(): void {
         }).walk(directory);
     });
 }
+
+parseArguments();
+readConfiguration();
+execute();

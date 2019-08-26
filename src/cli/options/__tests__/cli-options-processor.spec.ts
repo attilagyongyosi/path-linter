@@ -3,7 +3,7 @@ import { CliOptions } from '../cli-options';
 
 describe('CLI Options Processor', () => {
     it('should fall back to default when configuration argument is missing', () => {
-        let args: string[] = [
+        const args: string[] = [
             'test/server.js',
             '--colorize',
             '--some-other-arg',
@@ -15,7 +15,7 @@ describe('CLI Options Processor', () => {
     });
 
     it('should fail when no configuration file path is given', () => {
-        let args: string[] = [
+        const args: string[] = [
             'test/index.js',
             '--config'
         ];
@@ -28,7 +28,7 @@ describe('CLI Options Processor', () => {
     });
 
     it('should fail when configuration path argument is another option', () => {
-        let args: string[] = [
+        const args: string[] = [
             'lib.js',
             '--config',
             '--colorize'
@@ -42,14 +42,14 @@ describe('CLI Options Processor', () => {
     });
 
     it('should create CliOptions object', () => {
-        let args: string[] = [
+        const args: string[] = [
             'file.js',
             '--colorize',
             '--config',
             'config.json'
         ];
 
-        let processed: CliOptions = processCliOptions(args);
+        const processed: CliOptions = processCliOptions(args);
         expect(processed).toEqual({
             colorize: true,
             configFile: 'config.json'

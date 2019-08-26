@@ -25,7 +25,7 @@ export class Logger {
     }
 
     private log(level: string, message: string): void {
-        let newMessage = this.options.colorize ? message : deColorize(message);
+        const newMessage = this.options.colorize ? message : deColorize(message);
 
         if (level === 'info') {
             console.log(newMessage);

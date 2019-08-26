@@ -27,7 +27,7 @@ describe('FileVisitor', () => {
     });
 
     it('should call a function when done', (done) => {
-        visitor.visitorConfig.onFinish = () => {
+        visitor.visitorConfig.onFinish = (): void => {
             done();
         };
 
@@ -49,8 +49,7 @@ describe('FileVisitor', () => {
             done();
         });
 
-        // @ts-ignore   path must be specified here.
-        spyOn(fs, 'stat').and.callFake((path, callback) => {
+        spyOn(fs, 'stat').and.callFake((_, callback) => {
             callback(new Error('What'));
         });
 
