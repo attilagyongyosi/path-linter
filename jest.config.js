@@ -21,4 +21,4 @@ module.exports = {
     collectCoverage: true,
     coverageDirectory: "./generated/jest-coverage",
     coverageReporters: [ "html" ]
-}
+};
