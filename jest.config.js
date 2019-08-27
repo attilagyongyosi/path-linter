@@ -4,6 +4,10 @@ module.exports = {
         'node_modules',
         'lib'
     ],
+    testMatch: [
+        '**/__tests__/**/*.spec.ts',
+        '**/+(*.)+spec.+ts'
+    ],
     transform: {
         '^.+\\.ts$': 'ts-jest'
     },
