@@ -17,9 +17,10 @@ describe('FileVisitor', () => {
     });
 
     it('should call function when encountering files', (done) => {
+        const NUMBER_OF_FILES_IN_FIXTURE_FOLDER: number = 7;
         spyOn(visitor.visitorConfig, 'onFile').and.callThrough();
         spyOn(visitor.visitorConfig, 'onFinish').and.callFake(() => {
-            expect(visitor.visitorConfig.onFile).toHaveBeenCalledTimes(7);
+            expect(visitor.visitorConfig.onFile).toHaveBeenCalledTimes(NUMBER_OF_FILES_IN_FIXTURE_FOLDER);
             done();
         });
 

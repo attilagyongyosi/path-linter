@@ -9,13 +9,15 @@ import { processCliOptions } from './options/cli-options-processor';
 
 const LOG = new Logger();
 
+const CLI_OPTIONS_INDEX: number = 2;
+
 let cliOptions: CliOptions = new CliOptions();
 let configuration: Config = {};
 let filesLinted: number = 0;
 
 function parseArguments(): void {
     try {
-        cliOptions = processCliOptions(process.argv.slice(2));
+        cliOptions = processCliOptions(process.argv.slice(CLI_OPTIONS_INDEX));
         LOG.options = cliOptions;
     } catch (cliOptionsError) {
         LOG.error(cliOptionsError.message);
