@@ -1,6 +1,6 @@
 [![NPM version](https://badge.fury.io/js/path-linter.svg)](http://badge.fury.io/js/path-linter)
 
-# path-linter
+# @attilagyongyosi/path-linter
 Lightweight, zero-dependency library to lint file paths in a project.
 
 ## But why?
@@ -32,11 +32,11 @@ Enjoy!
 ## Installing
 `path-linter` should be added as a `devDependency`:
 ```bash
-npm install --save-dev path-linter
+npm install --save-dev @attilagyongyosi/path-linter
 ```
 or
 ```bash
-yarn add --dev path-linter
+yarn add --dev @attilagyongyosi/path-linter
 ```
 
 ## Configuration
