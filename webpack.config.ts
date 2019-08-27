@@ -16,7 +16,7 @@ const CONFIG: webpack.Configuration = {
     module: {
         rules: [{
             test: /\.ts$/,
-            loader: 'awesome-typescript-loader'
+            loader: 'ts-loader'
         }]
     },
     plugins: [
