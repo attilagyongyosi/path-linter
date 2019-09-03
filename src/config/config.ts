@@ -8,6 +8,8 @@
  * @author  attilagyongyosi
  * @see     ConfigReader
  */
+import { ConfigRule } from './config-rule';
+
 export interface Config {
-    [directory: string]: RegExp;
+    rules: ConfigRule[];
 }

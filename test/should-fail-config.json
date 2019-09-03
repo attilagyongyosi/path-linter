@@ -1,3 +1,6 @@
 {
-    "test/__fixture__/shouldfail": "^[a-z|A-Z|\\.|_|\\\\|/]+$"
+    "rules": [{
+        "directory": "test/__fixture__/shouldfail",
+        "regExp": "^[a-z|A-Z|\\.|_|\\\\|/]+$"
+    }]
 }

@@ -6,13 +6,14 @@ import { CliOptions } from './options/cli-options';
 import { Logger } from '../logger/logger';
 import { blue, cyan, green, red } from '../util/color-codes';
 import { processCliOptions } from './options/cli-options-processor';
+import { CONVENTION_MAP } from '../case-conventions/supported-case-conventions.enum';
 
 const LOG = new Logger();
 
 const CLI_OPTIONS_INDEX: number = 2;
 
 let cliOptions: CliOptions = new CliOptions();
-let configuration: Config = {};
+let configuration: Config = { rules: [] };
 let filesLinted: number = 0;
 
 function parseArguments(): void {
@@ -36,16 +37,22 @@ function readConfiguration(): void {
 }
 
 function execute(): void {
-    Object.keys(configuration).forEach((directory) => {
-        const directoryRegex = configuration[directory];
+    configuration.rules.forEach(rule => {
+        let directoryRegex: RegExp = rule.regExp;
+
+        // @todo: Better new config handling as part of the config-reader.
+        if (!directoryRegex && CONVENTION_MAP.has(rule.caseConvention)) {
+            directoryRegex = CONVENTION_MAP.get(rule.caseConvention) || new RegExp('');
+        }
+
         const linter = new Linter(directoryRegex);
 
         let failedPaths: number = 0;
 
-        LOG.info(`Started linting ${blue(directory)}...`);
+        LOG.info(`Started linting ${blue(rule.directory)}...`);
         new FileVisitor({
             onFinish: (): void => {
-                LOG.info(`Finished linting ${blue(directory)}!`);
+                LOG.info(`Finished linting ${blue(rule.directory)}!`);
                 if (!failedPaths) {
                     LOG.info(`Linted ${green(filesLinted + '')} file(s), no errors.`);
                 } else {
@@ -65,7 +72,7 @@ function execute(): void {
                 process.exit(1);
             },
             ignoreFiles: []
-        }).walk(directory);
+        }).walk(rule.directory);
     });
 }
 
