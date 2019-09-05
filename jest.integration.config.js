@@ -7,8 +7,8 @@ module.exports = {
         '**/__tests__/**/*.ispec.ts',
         '**/+(*.)+ispec.+ts'
     ],
-    transform: {'^.+\\.ts$': 'ts-jest'},
+    transform: { '^.+\\.ts$': 'ts-jest' },
     collectCoverage: true,
     coverageDirectory: './generated/jest-coverage',
-    coverageReporters: ['html']
+    coverageReporters: [ 'html' ]
 };
