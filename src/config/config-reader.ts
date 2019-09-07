@@ -2,6 +2,15 @@ import * as fs from 'fs';
 
 import { Config } from './config';
 
+export const NO_RULES_SPECIFIED_ERROR: string = 'Rules array missing in configuration!';
+
+function validator(parsedConfig: any): boolean {
+    if (!parsedConfig.hasOwnProperty('rules')) {
+        throw new Error(NO_RULES_SPECIFIED_ERROR);
+    }
+    return true;
+}
+
 /**
  * Functional utility class which can
  * read and process a supplied configuration file.
@@ -30,11 +39,10 @@ export class ConfigReader {
      *          malformed.
      */
     public static read(configPath: string): Config {
-        try {
-            const data = fs.readFileSync(configPath, { encoding: 'utf-8' });
-            return JSON.parse(data.toString());
-        } catch(error) {
-            throw error;
-        }
+        const data = fs.readFileSync(configPath, { encoding: 'utf-8' });
+        const parsed = JSON.parse(data.toString());
+
+        if (!validator(parsed)) { throw new Error('What is even happening'); }
+        return parsed;
     }
 }

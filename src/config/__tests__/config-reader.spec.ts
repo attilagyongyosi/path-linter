@@ -1,7 +1,7 @@
 import * as path from 'path';
 
 import { Config } from '../config';
-import { ConfigReader } from '../config-reader';
+import { ConfigReader, NO_RULES_SPECIFIED_ERROR } from '../config-reader';
 
 const context = (fileName: string): string => path.join(__dirname, fileName);
 
@@ -27,10 +27,10 @@ describe('The Configuration Reader', () => {
         }).toThrow();
     });
 
-    it('should throw error on malformed file', () => {
+    it('should throw error when no rules are specified in config', () => {
         expect(() => {
-            ConfigReader.read(context('mock-malformed-config.json'));
-        }).toThrow();
+            ConfigReader.read(context('config-with-no-rules.config.json'));
+        }).toThrow(NO_RULES_SPECIFIED_ERROR);
     });
 
     it('should throw error on an invalid regular expression', () => {
