@@ -38,7 +38,7 @@ function readConfiguration(): void {
 
 function execute(): void {
     configuration.rules.forEach(rule => {
-        let directoryRegex: RegExp = rule.regExp;
+        let directoryRegex: RegExp = new RegExp(rule.regExp);
 
         // @todo: Better new config handling as part of the config-reader.
         if (!directoryRegex && CONVENTION_MAP.has(rule.caseConvention)) {
