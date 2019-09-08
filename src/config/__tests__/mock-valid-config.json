@@ -1,9 +1,0 @@
-{
-    "rules": [{
-        "directory": "src",
-        "regExp": "^.*[a-z]$"
-    }, {
-        "directory": "lib",
-        "regExp": "(123|xyz)+"
-    }]
-}

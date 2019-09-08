@@ -1,0 +1,6 @@
+{
+    "rules": [{
+        "directory": "lib/whatever",
+        "regExp": "+"
+    }],
+}

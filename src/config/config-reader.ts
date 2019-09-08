@@ -1,32 +1,6 @@
 import * as fs from 'fs';
-
 import { Config } from './config';
-import { ConfigRule } from './config-rule';
-
-export const NO_RULES_SPECIFIED_ERROR: string = 'Rules array missing in configuration!';
-export const NO_DIRECTORY_SPECIFIED_ERROR: string = 'Directory property missing for rule!';
-
-const PROPERTY_RULES: string = 'rules';
-const PROPERTY_DIRECTORY: string = 'directory';
-
-function validator(parsedConfig: Config): boolean {
-    if (!parsedConfig.hasOwnProperty(PROPERTY_RULES)) {
-        throw new Error(NO_RULES_SPECIFIED_ERROR);
-    }
-
-    const rules: ConfigRule[] = parsedConfig.rules;
-    rules.forEach(rule => {
-        if (!rule.hasOwnProperty(PROPERTY_DIRECTORY)) {
-            throw new Error(NO_DIRECTORY_SPECIFIED_ERROR);
-        }
-
-        if (!rule.hasOwnProperty('regExp') && !rule.hasOwnProperty('caseConventions')) {
-            throw new Error('Either regExp or caseConvention should be specified for a rule!');
-        }
-    });
-
-    return true;
-}
+import { validate } from './validator/config-validator';
 
 /**
  * Functional utility class which can
@@ -59,7 +33,7 @@ export class ConfigReader {
         const data = fs.readFileSync(configPath, { encoding: 'utf-8' });
         const parsed = JSON.parse(data.toString());
 
-        if (!validator(parsed)) { throw new Error('What is even happening'); }
+        if (!validate(parsed)) { throw new Error('What is even happening'); }
         return parsed;
     }
 }
