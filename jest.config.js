@@ -10,7 +10,15 @@ module.exports = {
     ],
     transform: { '^.+\\.ts$': 'ts-jest' },
     collectCoverage: true,
-    collectCoverageFrom: [ 'src/**/*.ts', '!**/__tests__/**/*.ispec.ts' ],
+    coverageThreshold: {
+        global: {
+            branches: 80,
+            functions: 80,
+            lines: 80,
+            statements: 80
+        }
+    },
+    collectCoverageFrom: [ 'src/**/*.ts', '!**/cli/**/*.*', '!src/index.ts' ],
     coverageDirectory: './generated/jest-coverage',
     coverageReporters: [ 'html', 'text-summary' ]
 };
