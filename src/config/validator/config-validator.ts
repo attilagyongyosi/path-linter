@@ -1,25 +1,40 @@
 import { Config } from '../config';
 import { ConfigRule } from '../config-rule';
-import { NO_DIRECTORY_SPECIFIED_ERROR, NO_RULES_SPECIFIED_ERROR } from './config-validator-errors';
+import { ValidatorErrors } from './config-validator-errors';
 
 const PROPERTY_RULES: string = 'rules';
 const PROPERTY_DIRECTORY: string = 'directory';
 
+function checkDirectoryProperty(rule: ConfigRule): void {
+    if (!rule.hasOwnProperty(PROPERTY_DIRECTORY)) {
+        throw new Error(ValidatorErrors.NO_DIRECTORY);
+    }
+}
+
+function checkHasEitherRegexpOrConvention(rule: ConfigRule): void {
+    if (!rule.hasOwnProperty('regExp') && !rule.hasOwnProperty('caseConvention')) {
+        throw new Error(ValidatorErrors.NO_REGEXP_OR_CONVENTIONS);
+    }
+}
+
+function checkIfBothRegexpAndConventionIsPresent(rule: ConfigRule): void {
+    if (rule.hasOwnProperty('regExp') && rule.hasOwnProperty('caseConvention')) {
+        throw new Error(ValidatorErrors.REGEXP_AND_CONVENTIONS_PRESENT);
+    }
+}
+
+function validateRule(rule: ConfigRule): void {
+    checkDirectoryProperty(rule);
+    checkHasEitherRegexpOrConvention(rule);
+    checkIfBothRegexpAndConventionIsPresent(rule);
+}
+
 export function validate(parsedConfig: Config): boolean {
     if (!parsedConfig.hasOwnProperty(PROPERTY_RULES)) {
-        throw new Error(NO_RULES_SPECIFIED_ERROR);
+        throw new Error(ValidatorErrors.NO_RULES);
     }
 
     const rules: ConfigRule[] = parsedConfig.rules;
-    rules.forEach(rule => {
-        if (!rule.hasOwnProperty(PROPERTY_DIRECTORY)) {
-            throw new Error(NO_DIRECTORY_SPECIFIED_ERROR);
-        }
-
-        if (!rule.hasOwnProperty('regExp') && !rule.hasOwnProperty('caseConventions')) {
-            throw new Error('Either regExp or caseConvention should be specified for a rule!');
-        }
-    });
-
+    rules.forEach(validateRule);
     return true;
 }

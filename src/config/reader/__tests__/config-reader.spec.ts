@@ -2,7 +2,7 @@ import * as path from 'path';
 
 import { Config } from '../../config';
 import { ConfigReader } from '../../config-reader';
-import { NO_RULES_SPECIFIED_ERROR } from '../../validator/config-validator-errors';
+import { ValidatorErrors } from '../../validator/config-validator-errors';
 
 const context = (fileName: string): string => path.join(__dirname, fileName);
 
@@ -31,7 +31,7 @@ describe('The Configuration Reader', () => {
     it('should throw error when no rules are specified in config', () => {
         expect(() => {
             ConfigReader.read(context('config-with-no-rules.config.json'));
-        }).toThrow(NO_RULES_SPECIFIED_ERROR);
+        }).toThrow(ValidatorErrors.NO_RULES);
     });
 
     it('should throw error on an invalid regular expression', () => {
