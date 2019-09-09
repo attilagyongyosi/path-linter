@@ -1,4 +1,4 @@
-import { ConfigReader } from '../config/config-reader';
+import { ConfigReader } from '../config/reader/config-reader';
 import { Config } from '../config/config';
 import { FileVisitor } from '../file-visitor/file-visitor';
 import { Linter } from '../linter/linter';

@@ -1,40 +1,48 @@
-import { Config } from '../config';
 import { ConfigRule } from '../config-rule';
 import { ValidatorErrors } from './config-validator-errors';
 
 const PROPERTY_RULES: string = 'rules';
-const PROPERTY_DIRECTORY: string = 'directory';
+const PROPERTY_DIRECTORY = 'directory';
+const PROPERTY_REGEXP = 'regExp';
+const PROPERTY_CONVENTION = 'caseConvention';
 
-function checkDirectoryProperty(rule: ConfigRule): void {
-    if (!rule.hasOwnProperty(PROPERTY_DIRECTORY)) {
+type RuleValidator = (key: keyof ConfigRule) => boolean;
+
+function checkDirectoryProperty(ruleValidator: RuleValidator): void {
+    if (!ruleValidator(PROPERTY_DIRECTORY)) {
         throw new Error(ValidatorErrors.NO_DIRECTORY);
     }
 }
 
-function checkHasEitherRegexpOrConvention(rule: ConfigRule): void {
-    if (!rule.hasOwnProperty('regExp') && !rule.hasOwnProperty('caseConvention')) {
+function checkHasEitherRegexpOrConvention(ruleValidator: RuleValidator): void {
+    if (!ruleValidator(PROPERTY_REGEXP) && !ruleValidator(PROPERTY_CONVENTION)) {
         throw new Error(ValidatorErrors.NO_REGEXP_OR_CONVENTIONS);
     }
 }
 
-function checkIfBothRegexpAndConventionIsPresent(rule: ConfigRule): void {
-    if (rule.hasOwnProperty('regExp') && rule.hasOwnProperty('caseConvention')) {
+function checkIfBothRegexpAndConventionIsPresent(ruleValidator: RuleValidator): void {
+    if (ruleValidator(PROPERTY_REGEXP) && ruleValidator(PROPERTY_CONVENTION)) {
         throw new Error(ValidatorErrors.REGEXP_AND_CONVENTIONS_PRESENT);
     }
 }
 
-function validateRule(rule: ConfigRule): void {
-    checkDirectoryProperty(rule);
-    checkHasEitherRegexpOrConvention(rule);
-    checkIfBothRegexpAndConventionIsPresent(rule);
+function ruleValidator(rule: ConfigRule): RuleValidator {
+    return (key: keyof ConfigRule): boolean => rule.hasOwnProperty(key);
 }
 
-export function validate(parsedConfig: Config): boolean {
+function validateRule(rule: ConfigRule): void {
+    const validator = ruleValidator(rule);
+    checkDirectoryProperty(validator);
+    checkHasEitherRegexpOrConvention(validator);
+    checkIfBothRegexpAndConventionIsPresent(validator);
+}
+
+export function validate(parsedConfig: { [key: string]: object }): boolean {
     if (!parsedConfig.hasOwnProperty(PROPERTY_RULES)) {
         throw new Error(ValidatorErrors.NO_RULES);
     }
 
-    const rules: ConfigRule[] = parsedConfig.rules;
+    const rules: ConfigRule[] = parsedConfig['rules'] as ConfigRule[];
     rules.forEach(validateRule);
     return true;
 }
