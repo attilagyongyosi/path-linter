@@ -42,7 +42,7 @@ export function validate(parsedConfig: { [key: string]: object }): boolean {
         throw new Error(ValidatorErrors.NO_RULES);
     }
 
-    const rules: ConfigRule[] = parsedConfig['rules'] as ConfigRule[];
+    const rules: ConfigRule[] = parsedConfig[PROPERTY_RULES] as ConfigRule[];
     rules.forEach(validateRule);
     return true;
 }

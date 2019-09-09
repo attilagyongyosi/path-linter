@@ -1,7 +1,22 @@
 import { validate } from '../config-validator';
 import { ValidatorErrors } from '../config-validator-errors';
+import { SupportedCaseConventions } from '../../../case-conventions/supported-case-conventions.enum';
 
 describe('Config Validator', () => {
+    it('should return true when there are no validation errors', () => {
+        const config = {
+            rules: [ {
+                directory: './directory',
+                caseConvention: SupportedCaseConventions.KEBAB_CASE
+            }, {
+                directory: './an/other',
+                regExp: /.*/
+            } ]
+        };
+
+        expect(validate(config)).toBe(true);
+    });
+
     it('should throw error when rules property is missing', () => {
         expect(() => validate({})).toThrow(ValidatorErrors.NO_RULES);
     });

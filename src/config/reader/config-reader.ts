@@ -32,8 +32,7 @@ export class ConfigReader {
     public static read(configPath: string): Config {
         const data = fs.readFileSync(configPath, { encoding: 'utf-8' });
         const parsed = JSON.parse(data.toString());
-
-        if (!validate(parsed)) { throw new Error('What is even happening'); }
+        validate(parsed);
         return parsed;
     }
 }

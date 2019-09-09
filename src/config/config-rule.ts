@@ -2,6 +2,6 @@ import { SupportedCaseConventions } from '../case-conventions/supported-case-con
 
 export interface ConfigRule {
     directory: string;
-    caseConvention: SupportedCaseConventions;
-    regExp: RegExp;
+    caseConvention?: SupportedCaseConventions;
+    regExp?: RegExp;
 }
