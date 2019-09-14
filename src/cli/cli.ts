@@ -6,7 +6,7 @@ import { CliOptions } from './options/cli-options';
 import { Logger } from '../logger/logger';
 import { blue, cyan, green, red } from '../util/color-codes';
 import { processCliOptions } from './options/cli-options-processor';
-import { CONVENTION_MAP } from '../case-conventions/supported-case-conventions.enum';
+import { resolveRegexp } from '../config/regexp-resolver';
 
 const LOG = new Logger();
 
@@ -38,14 +38,8 @@ function readConfiguration(): void {
 
 function execute(): void {
     configuration.rules.forEach(rule => {
-        let directoryRegex: RegExp = new RegExp(rule.regExp);
-
-        // @todo: Better new config handling as part of the config-reader.
-        if (!directoryRegex && CONVENTION_MAP.has(rule.caseConvention)) {
-            directoryRegex = CONVENTION_MAP.get(rule.caseConvention) || new RegExp('');
-        }
-
-        const linter = new Linter(directoryRegex);
+        const regexp = resolveRegexp(rule);
+        const linter = new Linter(regexp);
 
         let failedPaths: number = 0;
 
@@ -62,7 +56,7 @@ function execute(): void {
             onFile: (file): void => {
                 filesLinted++;
                 if (!linter.lint(file)) {
-                    LOG.error(`${blue(file)} does not match ${cyan(directoryRegex.source)}!`);
+                    LOG.error(`${blue(file)} does not match ${cyan(regexp.source)}!`);
                     process.exitCode = 1;
                     failedPaths++;
                 }

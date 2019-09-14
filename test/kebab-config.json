@@ -1,6 +1,6 @@
 {
     "rules": [{
         "directory": "test/__fixture__/kebab-correct",
-        "regExp": "^[a-z|\\.|_|\\-|\\\\|/]+$"
+        "caseConvention": "kebab-case"
     }]
 }

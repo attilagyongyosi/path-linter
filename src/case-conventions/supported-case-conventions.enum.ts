@@ -11,5 +11,6 @@ export enum SupportedCaseConventions {
     KEBAB_CASE = 'kebab-case'
 }
 
-export const CONVENTION_MAP: Map<SupportedCaseConventions, RegExp> = new Map();
-CONVENTION_MAP.set(SupportedCaseConventions.KEBAB_CASE, new RegExp('^[a-z|_|\\.|\\-|\\\\|/]+\\.*$'));
+export const CONVENTION_MAP: { [key: string]: RegExp } = {
+    [SupportedCaseConventions.KEBAB_CASE.valueOf()]: new RegExp('^[a-z|_|\\.|\\-|\\\\|/]+\\.*$')
+};
