@@ -2,6 +2,8 @@ import * as fs from 'fs';
 import { FileVisitor } from '../file-visitor';
 import { FileVisitorConfig } from '../file-visitor-config';
 
+const FIXTURE_PATH: string = 'test/fixture';
+
 describe('FileVisitor', () => {
     const CONFIG: FileVisitorConfig = {
         onFile: () => {},
@@ -24,7 +26,7 @@ describe('FileVisitor', () => {
             done();
         });
 
-        visitor.walk('test/__fixture__');
+        visitor.walk(FIXTURE_PATH);
     });
 
     it('should call a function when done', (done) => {
@@ -32,7 +34,7 @@ describe('FileVisitor', () => {
             done();
         };
 
-        visitor.walk('test/__fixture__/empty');
+        visitor.walk(`${FIXTURE_PATH}/empty`);
     });
 
     it('should call a function when directory can not be read', (done) => {
@@ -41,7 +43,7 @@ describe('FileVisitor', () => {
             done();
         });
 
-        visitor.walk('test/__fixture__/non-existing');
+        visitor.walk(`${FIXTURE_PATH}/non-existing`);
     });
 
     it('should call a function when a path\'s stat can not be accessed', (done) => {
@@ -54,6 +56,6 @@ describe('FileVisitor', () => {
             callback(new Error('What'));
         });
 
-        visitor.walk('test/__fixture__');
+        visitor.walk(FIXTURE_PATH);
     });
 });

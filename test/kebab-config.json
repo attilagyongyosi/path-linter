@@ -1,6 +1,6 @@
 {
     "rules": [{
-        "directory": "test/__fixture__/kebab-correct",
+        "directory": "test/fixture/kebab-correct",
         "caseConvention": "kebab-case"
     }]
 }
