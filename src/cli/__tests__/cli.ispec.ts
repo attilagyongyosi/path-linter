@@ -12,7 +12,6 @@ describe('CLI', () => {
 
     it('should lint kebab-correct folder', done => {
         run([ '--config', 'test/kebab-config.json' ]).then(output => {
-            console.log(output);
             expect(output.code).toBe(0);
             expect(output.stderr).toBe('');
             expect(output.stdout).toContain('Linted 4 file(s)');

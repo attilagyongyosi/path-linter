@@ -19,6 +19,6 @@ module.exports = {
         }
     },
     collectCoverageFrom: [ 'src/**/*.ts', '!**/cli/**/*.*', '!src/index.ts' ],
-    coverageDirectory: './generated/jest-coverage',
+    coverageDirectory: './generated/jest-coverage/unit',
     coverageReporters: [ 'html', 'text-summary' ]
 };
