@@ -3,8 +3,7 @@ import { ValidatorErrors } from './config-validator-errors';
 
 const PROPERTY_RULES: string = 'rules';
 const PROPERTY_DIRECTORY = 'directory';
-const PROPERTY_REGEXP = 'regExp';
-const PROPERTY_CONVENTION = 'caseConvention';
+const PROPERTY_RULE = 'rule';
 
 type RuleValidator = (key: keyof ConfigRule) => boolean;
 
@@ -14,16 +13,8 @@ function checkDirectoryProperty(ruleValidator: RuleValidator): void {
     }
 }
 
-function checkHasEitherRegexpOrConvention(ruleValidator: RuleValidator): void {
-    if (!ruleValidator(PROPERTY_REGEXP) && !ruleValidator(PROPERTY_CONVENTION)) {
-        throw new Error(ValidatorErrors.NO_REGEXP_OR_CONVENTIONS);
-    }
-}
-
-function checkIfBothRegexpAndConventionIsPresent(ruleValidator: RuleValidator): void {
-    if (ruleValidator(PROPERTY_REGEXP) && ruleValidator(PROPERTY_CONVENTION)) {
-        throw new Error(ValidatorErrors.REGEXP_AND_CONVENTIONS_PRESENT);
-    }
+function checkRuleProperty(ruleValidator: RuleValidator): void {
+    if (!ruleValidator(PROPERTY_RULE)) { throw new Error();}
 }
 
 function ruleValidator(rule: ConfigRule): RuleValidator {
@@ -33,8 +24,7 @@ function ruleValidator(rule: ConfigRule): RuleValidator {
 function validateRule(rule: ConfigRule): void {
     const validator = ruleValidator(rule);
     checkDirectoryProperty(validator);
-    checkHasEitherRegexpOrConvention(validator);
-    checkIfBothRegexpAndConventionIsPresent(validator);
+    checkRuleProperty(validator);
 }
 
 export function validate(parsedConfig: { [key: string]: object }): boolean {
