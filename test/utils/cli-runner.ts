@@ -4,7 +4,7 @@ import { RunOutput } from './cli-run-output';
 
 export function run(args: string[]): Promise<RunOutput> {
     return new Promise((resolve) => {
-        const cli = fork(path.join('lib', 'main'), args, { silent: true });
+        const cli = fork(path.join('lib', 'index'), args, { silent: true });
 
         let stdout = '';
         let stderr = '';
