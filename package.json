@@ -13,7 +13,9 @@
         "test-run": "yarn build && node lib/main.js --config sample-config.json",
         "test:unit": "jest",
         "test:integration": "yarn build && jest -c jest.integration.config.js",
-        "test": "yarn test:unit && yarn test:integration"
+        "test": "yarn test:unit && yarn test:integration",
+        "release:patch": "release-it patch",
+        "release:minor": "release-it minor"
     },
     "license": "MIT",
     "repository": {
@@ -46,6 +48,11 @@
         "interpreter": "node",
         "files": [ "./src/index.ts" ]
     }],
+    "release-it": {
+        "git": {
+            "requireUpstream": false
+        }
+    },
     "devDependencies": {
         "@attilagyongyosi/eslint-config": "0.2.0",
         "@types/node": "10.14.19",
@@ -58,6 +65,7 @@
         "jest": "24.9.0",
         "parcel-bundler": "1.12.3",
         "parcel-plugin-shebang": "1.2.8",
+        "release-it": "12.4.1",
         "rimraf": "3.0.0",
         "ts-jest": "24.1.0",
         "typescript": "3.6.3"
