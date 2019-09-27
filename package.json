@@ -11,8 +11,8 @@
         "build": "parcel build src/index.ts --target node --out-dir lib && chmod +x lib/index.js",
         "test-run:default": "yarn build && node lib/main.js",
         "test-run": "yarn build && node lib/main.js --config sample-config.json",
-        "test:unit": "jest",
-        "test:integration": "yarn build && jest -c jest.integration.config.js",
+        "test:unit": "jest --runInBand",
+        "test:integration": "yarn build && jest --runInBand -c jest.integration.config.js",
         "test": "yarn test:unit && yarn test:integration",
         "release:patch": "release-it patch",
         "release:minor": "release-it minor"
