@@ -1,3 +1,5 @@
+const COVERAGE_THRESHOLD = 80;
+
 module.exports = {
     rootDir: '.',
     moduleDirectories: [
@@ -12,10 +14,10 @@ module.exports = {
     collectCoverage: true,
     coverageThreshold: {
         global: {
-            branches: 80,
-            functions: 80,
-            lines: 80,
-            statements: 80
+            branches: COVERAGE_THRESHOLD,
+            functions: COVERAGE_THRESHOLD,
+            lines: COVERAGE_THRESHOLD,
+            statements: COVERAGE_THRESHOLD
         }
     },
     collectCoverageFrom: [ 'src/**/*.ts', '!**/cli/**/*.*', '!src/index.ts' ],
