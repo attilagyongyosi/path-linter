@@ -43,13 +43,23 @@ yarn add --dev @attilagyongyosi/path-linter
 `path-linter` needs a JSON configuration file somewhere in your project where you specify
 your linting rules.
 
-Linting rules are regular expressions and you can specify different rules for different folders.
+You can specify different linting rules for different directories in your project.
+Rules can either be a regular expression or one of the built-in naming conventions that
+`path-linter` supports out of the box.
+
+These include, at the moment:
+- `kebab-case`
 
 Example:
 ```json
 {
-    "your-subdirectory": "<regex-for-linting>",
-    "other/directory": "<another-regex-for-linting>"
+    "rules": [{
+        "directory": "src",
+        "rule": "kebab-case"
+    }, {
+        "directory": "tests",
+        "rule": ".*\\.spec\\.ts"
+    }]
 }
 ```
 
