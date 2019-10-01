@@ -8,7 +8,7 @@
         "clean": "rimraf ./lib",
         "copy:files": "copyfiles package.json README.md LICENSE.md lib",
         "lint": "eslint src/**/*.ts",
-        "build": "parcel build src/index.ts --target node --out-dir lib && chmod +x lib/index.js",
+        "build": "parcel build src/index.ts --no-source-maps --target node --out-dir lib && chmod +x lib/index.js",
         "test-run:default": "yarn build && node lib/main.js",
         "test-run": "yarn build && node lib/main.js --config sample-config.json",
         "test:unit": "jest --runInBand",
