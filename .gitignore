@@ -15,3 +15,7 @@ generated/
 
 # Logs
 *.log
+
+# Packs
+*.zip
+*.tgz
