@@ -1,4 +1,9 @@
 {
-    "lib": "^[a-z|_|\\.|\\-|\\\\|/]+\\.(ts|js|html|scss|json)$",
-    "test": ".*\\.ts"
+    "rules": [{
+        "directory": "lib",
+        "rule": "^[a-z|_|\\.|\\-|\\\\|/]+\\.(ts|js|html|scss|json)$"
+    }, {
+        "directory": "test",
+        "rule": "kebab-case"
+    }]
 }
