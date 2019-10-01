@@ -15,7 +15,8 @@
         "test:integration": "yarn build && jest --runInBand -c jest.integration.config.js",
         "test": "yarn test:unit && yarn test:integration",
         "release:patch": "release-it patch",
-        "release:minor": "release-it minor"
+        "release:minor": "release-it minor",
+        "release:major": "release-it major"
     },
     "license": "MIT",
     "repository": {
