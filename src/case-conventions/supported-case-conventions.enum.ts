@@ -4,7 +4,7 @@
  * without the need to have it configured
  * with a regular expression by the user.
  *
- * @author  Attila_Gyongyosi
+ * @author  attilagyongyosi
  */
 export enum SupportedCaseConventions {
     KEBAB_CASE = 'kebab-case'

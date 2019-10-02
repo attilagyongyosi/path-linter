@@ -7,6 +7,7 @@ import { Logger } from '../logger/logger';
 import { blue, cyan, green, red } from '../util/color-codes';
 import { processCliOptions } from './options/cli-options-processor';
 import { resolveRegexp } from '../config/regexp-resolver';
+import { ExitCodes } from '../util/exit-codes';
 
 const LOG = new Logger();
 
@@ -22,7 +23,7 @@ function parseArguments(): void {
         LOG.options = cliOptions;
     } catch (cliOptionsError) {
         LOG.error(cliOptionsError.message);
-        process.exit(1);
+        process.exit(ExitCodes.ERROR);
     }
 }
 
@@ -32,7 +33,7 @@ function readConfiguration(): void {
         configuration = ConfigReader.read(configPathArg);
     } catch(error) {
         LOG.error(`Failed to read configuration file! Reason: ${error.message}`);
-        process.exit(1);
+        process.exit(ExitCodes.ERROR);
     }
 }
 
@@ -57,13 +58,13 @@ function execute(): void {
                 filesLinted++;
                 if (!linter.lint(file)) {
                     LOG.error(`${blue(file)} does not match ${cyan(regexp.source)}!`);
-                    process.exitCode = 1;
+                    process.exitCode = ExitCodes.ERROR;
                     failedPaths++;
                 }
             },
             onError: (error): void => {
                 LOG.error(error.message);
-                process.exit(1);
+                process.exit(ExitCodes.ERROR);
             },
             ignoreFiles: []
         }).walk(rule.directory);
