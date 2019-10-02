@@ -1,0 +1,6 @@
+{
+    "rules": [{
+        "directory": "src",
+        "rule": "kebab-case"
+    }]
+}
