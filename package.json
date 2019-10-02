@@ -19,6 +19,9 @@
         "release:major": "release-it major",
         "release:major:pre": "yarn release:major --preRelease=rc"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "license": "MIT",
     "repository": {
         "type": "git",
