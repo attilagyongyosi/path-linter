@@ -14,7 +14,7 @@ function checkDirectoryProperty(ruleValidator: RuleValidator): void {
 }
 
 function checkRuleProperty(ruleValidator: RuleValidator): void {
-    if (!ruleValidator(PROPERTY_RULE)) { throw new Error();}
+    if (!ruleValidator(PROPERTY_RULE)) { throw new Error(ValidatorErrors.NO_RULE);}
 }
 
 function ruleValidator(rule: ConfigRule): RuleValidator {
