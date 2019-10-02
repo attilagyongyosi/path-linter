@@ -40,22 +40,6 @@
     ],
     "homepage": "https://github.com/attilagyongyosi/path-linter",
     "private": false,
-    "husky": {
-        "hooks": {
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-            "pre-commit": "yarn lint",
-            "pre-push": "yarn test && yarn build"
-        }
-    },
-    "shebang": [{
-        "interpreter": "node",
-        "files": [ "./src/index.ts" ]
-    }],
-    "release-it": {
-        "git": {
-            "requireUpstream": false
-        }
-    },
     "devDependencies": {
         "@attilagyongyosi/eslint-config": "0.2.0",
         "@commitlint/cli": "8.2.0",

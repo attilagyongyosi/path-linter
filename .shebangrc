@@ -1,0 +1,4 @@
+[{
+    "interpreter": "node",
+    "files": [ "./src/index.ts" ]
+}]
