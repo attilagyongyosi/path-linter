@@ -1,4 +1,5 @@
 {
+    "severity": "warning",
     "rules": [{
         "directory": "src",
         "rule": "kebab-case"

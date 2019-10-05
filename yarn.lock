@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@attilagyongyosi/eslint-config/-/eslint-config-0.3.0.tgz#1cf47fba2ea052dba5e81145d92211153b96d3d3"
   integrity sha512-80Jwb+nvWi93buGEA048b7Q3OYyzrbrTSfpsFBOZvXScp0nQwQPdJ7UuuIOfBxQdE5ewtTQdQRMKiPLdcwsxFg==
 
-"@attilagyongyosi/path-linter@2.0.0-rc.0":
-  version "2.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@attilagyongyosi/path-linter/-/path-linter-2.0.0-rc.0.tgz#e6e0a3b14fecead99c4a1a9db69f1df9669ce865"
-  integrity sha512-+aPgud/4NRfaiwDWsmG1q0Zdr988Gu28N3MJjj9yXf8xKjpi235s7/8VXuxlVNrJdf7MwPekpL5tPSH78LueYQ==
+"@attilagyongyosi/path-linter@2.0.0-rc.1":
+  version "2.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/@attilagyongyosi/path-linter/-/path-linter-2.0.0-rc.1.tgz#9c4bc816607fa7ede2f298383976b1664bb0fc3b"
+  integrity sha512-LybTkVKnuRCMxp0RoaaZZbkoWHtmWSphPEUONjyPqOcYarfwLbVUZC+MsaftIou7iQG9gND+TqOXB1uNZKEEvQ==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.5.5":
   version "7.5.5"
