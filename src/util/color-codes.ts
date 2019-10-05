@@ -25,6 +25,10 @@ export function blue(text: string): string {
     return colorize(text, AnsiColors.BLUE);
 }
 
+export function yellow(text: string): string {
+    return colorize(text, AnsiColors.YELLOW);
+}
+
 export function cyan(text: string): string {
     return colorize(text, AnsiColors.CYAN);
 }

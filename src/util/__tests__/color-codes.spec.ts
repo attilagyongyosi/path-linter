@@ -1,4 +1,4 @@
-import { blue, cyan, deColorize, green, red } from '../color-codes';
+import { blue, cyan, deColorize, green, red, yellow } from '../color-codes';
 
 describe('Color Code Utils', () => {
     describe('deColorize() function', () => {
@@ -22,6 +22,10 @@ describe('Color Code Utils', () => {
             testString = `[${green('info')}] Some ${green('green text')}`;
             deColorized = deColorize(testString);
             expect(deColorized).toBe('[info] Some green text');
+
+            testString = `[${yellow('warning')}] Some ${yellow('yellow text')}`;
+            deColorized = deColorize(testString);
+            expect(deColorized).toBe('[warning] Some yellow text');
         });
     });
 });
