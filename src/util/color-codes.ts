@@ -1,3 +1,5 @@
+import { AnsiColors } from './ansi-colors.enum';
+
 /**
  * Special regular expression that matches ANSI escape
  * sequences.
@@ -7,32 +9,24 @@ const ANSI_REGEX = [
     '(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PRZcf-ntqry=><~]))'
 ].join('|');
 
-/**
- * Colors (ANSI escape sequences) used
- * by path-linter.
- */
-export const COLORS = {
-    GREEN: '\x1b[32m',
-    BLUE: '\x1b[94m',
-    CYAN: '\x1b[36m',
-    RED: '\x1b[31m',
-    RESET: '\x1b[0m'
-};
+export function colorize(text: string, color: AnsiColors): string {
+    return `${color}${text}${AnsiColors.RESET}`;
+}
 
 export function green(text: string): string {
-    return `${COLORS.GREEN}${text}${COLORS.RESET}`;
+    return colorize(text, AnsiColors.GREEN);
 }
 
 export function red(text: string): string {
-    return `${COLORS.RED}${text}${COLORS.RESET}`;
+    return colorize(text, AnsiColors.RED);
 }
 
 export function blue(text: string): string {
-    return `${COLORS.BLUE}${text}${COLORS.RESET}`;
+    return colorize(text, AnsiColors.BLUE);
 }
 
 export function cyan(text: string): string {
-    return `${COLORS.CYAN}${text}${COLORS.RESET}`;
+    return colorize(text, AnsiColors.CYAN);
 }
 
 export function deColorize(message: string): string {
