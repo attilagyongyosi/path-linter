@@ -21,7 +21,7 @@ module.exports = {
             statements: COVERAGE_THRESHOLD
         }
     },
-    collectCoverageFrom: [ 'src/**/*.ts', '!**/cli/**/*.*', '!src/index.ts' ],
+    collectCoverageFrom: [ 'src/**/*.ts', '!**/cli/**/*.*', '!**/*.ispec.ts', '!src/index.ts' ],
     coverageDirectory: './generated/jest-coverage/unit',
     coverageReporters: [ 'html', 'text-summary' ]
 };
