@@ -1,15 +1,17 @@
 /**
  * Linting configuration shape.
  *
- * Denotes an object where keys are relative directory
- * paths and values are regular expression which will be
- * used to lint file paths in that particular directory.
+ * path-linter's configuration files will be
+ * parsed and validated against this object
+ * structure.
  *
  * @author  attilagyongyosi
  * @see     ConfigReader
  */
 import { ConfigRule } from './config-rule';
+import { SeverityLevels } from './severity-levels';
 
 export interface Config {
+    severity?: SeverityLevels;
     rules: ConfigRule[];
 }
