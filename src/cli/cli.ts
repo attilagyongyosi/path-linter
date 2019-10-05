@@ -8,6 +8,7 @@ import { blue, cyan, green, red } from '../util/color-codes';
 import { processCliOptions } from './options/cli-options-processor';
 import { resolveRegexp } from '../config/regexp-resolver';
 import { ExitCodes } from '../util/exit-codes';
+import { SeverityLevels } from '../config/severity-levels';
 
 const LOG = new Logger();
 
@@ -38,6 +39,8 @@ function readConfiguration(): void {
 }
 
 function execute(): void {
+    const severity = configuration.severity || SeverityLevels.ERROR;
+
     configuration.rules.forEach(rule => {
         const regexp = resolveRegexp(rule);
         const linter = new Linter(regexp);
@@ -57,8 +60,12 @@ function execute(): void {
             onFile: (file): void => {
                 filesLinted++;
                 if (!linter.lint(file)) {
-                    LOG.error(`${blue(file)} does not match ${cyan(regexp.source)}!`);
-                    process.exitCode = ExitCodes.ERROR;
+                    if (severity === SeverityLevels.ERROR) {
+                        LOG.error(`${blue(file)} does not match ${cyan(regexp.source)}!`);
+                        process.exitCode = ExitCodes.ERROR;
+                    } else {
+                        LOG.warning(`${blue(file)} does not match ${cyan(regexp.source)}!`);
+                    }
                     failedPaths++;
                 }
             },
