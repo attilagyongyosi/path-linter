@@ -1,0 +1,6 @@
+{
+    "rules": [{
+        "directory": "test/fixture/kebab-correct",
+        "rule": "kebab-case"
+    }]
+}

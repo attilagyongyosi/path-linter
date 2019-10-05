@@ -4,6 +4,8 @@ import { RunOutput } from '../../../test/utils/cli-run-output';
 import { CliSwitches } from '../options/cli-switches.enum';
 import { ValidatorErrors } from '../../config/validator/config-validator-errors';
 
+const TEST_CONFIG_BASE: string = 'test/configs';
+
 async function testRun(configFile: string, expectedResult: RunOutput, done: Function): Promise<void> {
     const result = await run([ CliSwitches.CONFIG, configFile ]);
     expect(result.code).toBe(expectedResult.code);
@@ -28,8 +30,8 @@ describe('CLI End-to-End', () => {
             stderr: '',
             stdout: 'Linted 4 file(s)'
         };
-        testRun('test/kebab-config.json', expected, done);
-    });
+        testRun(`${TEST_CONFIG_BASE}/kebab.config.json`, expected, done);
+    })
 
     it('should fail with 1 linting error in should-fail folder', done => {
         const expected: RunOutput = {
@@ -37,7 +39,7 @@ describe('CLI End-to-End', () => {
             stderr: 'does not match',
             stdout: 'Linted 3 file(s)'
         };
-        testRun('test/should-fail-config.json', expected, done);
+        testRun(`${TEST_CONFIG_BASE}/should-fail.config.json`, expected, done);
     });
 
     it('should fail with error when config doesn\'t contain rules', done => {
@@ -46,7 +48,7 @@ describe('CLI End-to-End', () => {
             stdout: '',
             stderr: ValidatorErrors.NO_RULES
         };
-        testRun('test/no-rules-config.json', expected, done);
+        testRun(`${TEST_CONFIG_BASE}/no-rules.config.json`, expected, done);
     });
 
     it('should fail with error when config is missing a directory property', done => {
@@ -55,7 +57,7 @@ describe('CLI End-to-End', () => {
             stdout: '',
             stderr: ValidatorErrors.NO_DIRECTORY
         };
-        testRun('test/no-directory-config.json', expected, done);
+        testRun(`${TEST_CONFIG_BASE}/no-directory.config.json`, expected, done);
     });
 
     it('should fail with error when config is missing rule property', done => {
@@ -64,6 +66,24 @@ describe('CLI End-to-End', () => {
             stdout: '',
             stderr: ValidatorErrors.NO_RULE
         };
-        testRun('test/no-rule-config.json', expected, done);
+        testRun(`${TEST_CONFIG_BASE}/no-rule.config.json`, expected, done);
+    });
+
+    it('should fail with error when config has invalid severity property', done => {
+        const expected: RunOutput = {
+            code: ExitCodes.ERROR,
+            stdout: '',
+            stderr: ValidatorErrors.WRONG_SEVERITY
+        };
+        testRun(`${TEST_CONFIG_BASE}/invalid-severity.config.json`, expected, done);
+    });
+
+    it('should not fail process when severity is warning', done => {
+        const expected: RunOutput = {
+            code: ExitCodes.OK,
+            stdout: '',
+            stderr: '[warning]'
+        };
+        testRun(`${TEST_CONFIG_BASE}/warning-severity.config.json`, expected, done);
     });
 });

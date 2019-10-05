@@ -1,6 +1,0 @@
-{
-    "rules": [{
-        "directory": "test/fixture/shouldfail",
-        "rule": "^[a-z|A-Z|\\.|_|\\\\|/]+$"
-    }]
-}

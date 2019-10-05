@@ -1,0 +1,7 @@
+{
+    "severity": "warning",
+    "rules": [{
+        "directory": "test/fixture/kebab-correct",
+        "rule": ".*\\.xml$"
+    }]
+}
