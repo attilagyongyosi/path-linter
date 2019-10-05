@@ -1,4 +1,6 @@
 import { Logger } from '../logger';
+import { Colorizer } from '../../colorizer/colorizer';
+import { AnsiColors } from '../../colorizer/ansi-colors.enum';
 
 describe('CLI Logger', () => {
     const LOG = new Logger();
@@ -19,5 +21,19 @@ describe('CLI Logger', () => {
         spyOn(console, 'error').and.callThrough();
         LOG.error('Message');
         expect(console.error).toHaveBeenNthCalledWith(1, '[error] Message');
+    });
+
+    it('should display a colorized message when enabled', () => {
+        const colorizingLogger = new Logger({
+            configFile: '',
+            colorize: true
+        });
+
+        const expectedMessage = `[${AnsiColors.RED}error${AnsiColors.RESET}] Message`;
+
+        spyOn(console, 'error').and.callThrough();
+        spyOn(Colorizer, 'red').and.returnValue(expectedMessage);
+        colorizingLogger.error('Message');
+        expect(console.error).toHaveBeenNthCalledWith(1, expectedMessage);
     });
 });
