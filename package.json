@@ -46,7 +46,7 @@
     "homepage": "https://github.com/attilagyongyosi/path-linter",
     "private": false,
     "devDependencies": {
-        "@attilagyongyosi/eslint-config": "0.2.0",
+        "@attilagyongyosi/eslint-config": "0.3.0",
         "@commitlint/cli": "8.2.0",
         "@commitlint/config-conventional": "8.2.0",
         "@types/node": "10.14.19",
