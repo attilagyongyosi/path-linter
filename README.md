@@ -16,13 +16,13 @@ For a while, I also wanted to do some open source project on my own, just for th
 of trying myself in this game.  
 So here it is!
 
-It is currently **~8kb in size**, comes with **no dependencies**. The size could be smaller, I sacrificed it a bit on the altar 
+It is currently **~10kb in size**, comes with **no dependencies**. The size could be smaller, I sacrificed it a bit on the altar 
 of structural well-being.
 
 Enjoy!
 
 ## Neat things
-* ~8kb package size
+* ~10kb package size
 * no dependencies
 * supports file extension linting
 * supports different naming convention per folder
@@ -50,9 +50,15 @@ Rules can either be a regular expression or one of the built-in naming conventio
 These include, at the moment:
 - `kebab-case`
 
+You can also configure linting severity in the top-level `severity` configuration property.  
+
+It is `error` by default which will fail the linting process when file path do not adhere
+to configured conventions, or can be `warning` to just log warnings on failing files.
+
 Example:
 ```json
 {
+    "severity": "warning",
     "rules": [{
         "directory": "src",
         "rule": "kebab-case"

@@ -1,4 +1,5 @@
 {
+    "severity": "warning",
     "rules": [{
         "directory": "lib",
         "rule": "^[a-z|_|\\.|\\-|\\\\|/]+\\.(ts|js|html|scss|json)$"
