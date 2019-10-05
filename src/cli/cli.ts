@@ -4,11 +4,11 @@ import { FileVisitor } from '../file-visitor/file-visitor';
 import { Linter } from '../linter/linter';
 import { CliOptions } from './options/cli-options';
 import { Logger } from '../logger/logger';
-import { blue, cyan, green, red } from '../util/color-codes';
 import { processCliOptions } from './options/cli-options-processor';
 import { resolveRegexp } from '../config/regexp-resolver';
 import { ExitCodes } from '../util/exit-codes';
 import { SeverityLevels } from '../config/severity-levels';
+import { Colorizer } from '../colorizer/colorizer';
 
 const LOG = new Logger();
 
@@ -47,24 +47,26 @@ function execute(): void {
 
         let failedPaths: number = 0;
 
-        LOG.info(`Started linting ${blue(rule.directory)}...`);
+        LOG.info(`Started linting ${Colorizer.blue(rule.directory)}...`);
         new FileVisitor({
             onFinish: (): void => {
-                LOG.info(`Finished linting ${blue(rule.directory)}!`);
+                LOG.info(`Finished linting ${Colorizer.blue(rule.directory)}!`);
                 if (!failedPaths) {
-                    LOG.info(`Linted ${green(filesLinted + '')} file(s), no errors.`);
+                    LOG.info(`Linted ${Colorizer.green(filesLinted + '')} file(s), no errors.`);
                 } else {
-                    LOG.info(`Linted ${green(filesLinted + '')} file(s), ${red('' + failedPaths)} didn't match pattern.`);
+                    const lintedMessage = Colorizer.green(filesLinted + '');
+                    const errors = Colorizer.red('' + failedPaths);
+                    LOG.info(`Linted ${lintedMessage} file(s), ${errors} didn't match pattern.`);
                 }
             },
             onFile: (file): void => {
                 filesLinted++;
                 if (!linter.lint(file)) {
                     if (severity === SeverityLevels.ERROR) {
-                        LOG.error(`${blue(file)} does not match ${cyan(regexp.source)}!`);
+                        LOG.error(`${Colorizer.blue(file)} does not match ${Colorizer.cyan(regexp.source)}!`);
                         process.exitCode = ExitCodes.ERROR;
                     } else {
-                        LOG.warning(`${blue(file)} does not match ${cyan(regexp.source)}!`);
+                        LOG.warning(`${Colorizer.blue(file)} does not match ${Colorizer.cyan(regexp.source)}!`);
                     }
                     failedPaths++;
                 }

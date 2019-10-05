@@ -1,5 +1,5 @@
 import { CliOptions } from '../cli/options/cli-options';
-import { deColorize, green, red, yellow } from '../util/color-codes';
+import { Colorizer } from '../colorizer/colorizer';
 
 /**
  * Provides advanced console logging capabilities
@@ -11,9 +11,9 @@ import { deColorize, green, red, yellow } from '../util/color-codes';
  * @author  attilagyongyosi
  */
 export class Logger {
-    private readonly infoPrefix = `[${green('info')}] `;
-    private readonly warningPrefix = `[${yellow('warning')}] `;
-    private readonly errorPrefix = `[${red('error')}] `;
+    private readonly infoPrefix = `[${Colorizer.green('info')}] `;
+    private readonly warningPrefix = `[${Colorizer.yellow('warning')}] `;
+    private readonly errorPrefix = `[${Colorizer.red('error')}] `;
 
     constructor(public options: CliOptions = new CliOptions()) {}
 
@@ -30,7 +30,7 @@ export class Logger {
     }
 
     private log(level: string, message: string): void {
-        const newMessage = this.options.colorize ? message : deColorize(message);
+        const newMessage = this.options.colorize ? message : Colorizer.deColorize(message);
 
         switch (level) {
         case 'info':
