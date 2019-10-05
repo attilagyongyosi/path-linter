@@ -21,7 +21,7 @@ let filesLinted: number = 0;
 function parseArguments(): void {
     try {
         cliOptions = processCliOptions(process.argv.slice(CLI_OPTIONS_INDEX));
-        LOG.options = cliOptions;
+        LOG.colorize = cliOptions.colorize || false;
     } catch (cliOptionsError) {
         LOG.error(cliOptionsError.message);
         process.exit(ExitCodes.ERROR);

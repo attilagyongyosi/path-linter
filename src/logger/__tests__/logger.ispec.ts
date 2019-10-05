@@ -1,7 +1,7 @@
 import { Logger } from '../logger';
 import { Colorizer } from '../../colorizer/colorizer';
 
-const log = new Logger({ colorize: true, configFile: '' });
+const log = new Logger(true);
 
 describe('Logger Integration Suite', () => {
     it('should log colorized info messages', () => {

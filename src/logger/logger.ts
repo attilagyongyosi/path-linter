@@ -1,4 +1,3 @@
-import { CliOptions } from '../cli/options/cli-options';
 import { Colorizer } from '../colorizer/colorizer';
 
 /**
@@ -15,7 +14,7 @@ export class Logger {
     private readonly warningPrefix = `[${Colorizer.yellow('warning')}] `;
     private readonly errorPrefix = `[${Colorizer.red('error')}] `;
 
-    constructor(public options: CliOptions = new CliOptions()) {}
+    constructor(public colorize: boolean = false) {}
 
     public info(message: string): void {
         this.log('info', `${this.infoPrefix}${message}`);
@@ -30,7 +29,7 @@ export class Logger {
     }
 
     private log(level: string, message: string): void {
-        const newMessage = this.options.colorize ? message : Colorizer.deColorize(message);
+        const newMessage = this.colorize ? message : Colorizer.deColorize(message);
 
         switch (level) {
         case 'info':

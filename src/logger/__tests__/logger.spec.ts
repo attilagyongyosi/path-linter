@@ -24,11 +24,7 @@ describe('CLI Logger', () => {
     });
 
     it('should display a colorized message when enabled', () => {
-        const colorizingLogger = new Logger({
-            configFile: '',
-            colorize: true
-        });
-
+        const colorizingLogger = new Logger(true);
         const expectedMessage = `[${AnsiColors.RED}error${AnsiColors.RESET}] Message`;
 
         spyOn(console, 'error').and.callThrough();
