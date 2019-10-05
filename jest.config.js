@@ -2,6 +2,7 @@ const COVERAGE_THRESHOLD = 80;
 
 module.exports = {
     rootDir: '.',
+    verbose: true,
     testEnvironment: 'node',
     moduleDirectories: [
         'node_modules',

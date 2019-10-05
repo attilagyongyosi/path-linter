@@ -41,4 +41,14 @@ describe('Config Validator', () => {
 
         expect(() => validate(config)).toThrow(new Error(ValidatorErrors.NO_RULE));
     });
+
+    it('should validate a valid severity property', () => {
+        const config = { severity: 'warning', rules: [] };
+        expect(() => validate(config)).not.toThrowError();
+    });
+
+    it('should throw error on an invalid severity property', () => {
+        const config = { severity: 'funky', rules: [] };
+        expect(() => validate(config)).toThrow(ValidatorErrors.WRONG_SEVERITY);
+    });
 });
