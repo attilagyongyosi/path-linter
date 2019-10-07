@@ -4,7 +4,8 @@
         "directory": "lib",
         "rule": "^[a-z|_|\\.|\\-|\\\\|/]+\\.(ts|js|html|scss|json)$"
     }, {
-        "directory": "test",
-        "rule": "kebab-case"
+        "directory": "src",
+        "rule": "kebab-case",
+        "ignore": [ "__tests__", "__mocks__" ]
     }]
 }

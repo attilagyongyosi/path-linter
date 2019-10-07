@@ -5,7 +5,6 @@ import { Linter } from '../linter/linter';
 import { CliOptions } from './options/cli-options';
 import { Logger } from '../logger/logger';
 import { processCliOptions } from './options/cli-options-processor';
-import { resolveRegexp } from '../config/regexp-resolver';
 import { ExitCodes } from '../util/exit-codes';
 import { SeverityLevels } from '../config/severity-levels';
 import { Colorizer } from '../colorizer/colorizer';
@@ -39,13 +38,15 @@ function readConfiguration(): void {
     }
 }
 
+/**
+ * @todo    at this point resolveRegexp() should have been called for logging purposes.
+ */
 function execute(): void {
     const startTime = Date.now();
     const severity = configuration.severity || SeverityLevels.ERROR;
 
     configuration.rules.forEach(rule => {
-        const regexp = resolveRegexp(rule);
-        const linter = new Linter(regexp);
+        const linter = new Linter(rule);
 
         let failedPaths: number = 0;
 
@@ -66,10 +67,10 @@ function execute(): void {
                 filesLinted++;
                 if (!linter.lint(file)) {
                     if (severity === SeverityLevels.ERROR) {
-                        LOG.error(`${Colorizer.blue(file)} does not match ${Colorizer.cyan(regexp.source)}!`);
+                        LOG.error(`${Colorizer.blue(file)} does not match ${Colorizer.cyan(rule.rule)}!`);
                         process.exitCode = ExitCodes.ERROR;
                     } else {
-                        LOG.warning(`${Colorizer.blue(file)} does not match ${Colorizer.cyan(regexp.source)}!`);
+                        LOG.warning(`${Colorizer.blue(file)} does not match ${Colorizer.cyan(rule.rule)}!`);
                     }
                     failedPaths++;
                 }

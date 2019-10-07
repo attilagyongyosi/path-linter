@@ -1,6 +1,7 @@
 {
     "rules": [{
         "directory": "test/fixture/kebab-correct",
-        "rule": "kebab-case"
+        "rule": "kebab-case",
+        "ignore": [ "__tests__", "__mocks__" ]
     }]
 }
