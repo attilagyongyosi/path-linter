@@ -13,6 +13,7 @@ import { Colorizer } from '../colorizer/colorizer';
 const LOG = new Logger();
 
 const CLI_OPTIONS_INDEX: number = 2;
+const MILLISECONDS: number = 1000;
 
 let cliOptions: CliOptions = new CliOptions();
 let configuration: Config = { rules: [] };
@@ -39,6 +40,7 @@ function readConfiguration(): void {
 }
 
 function execute(): void {
+    const startTime = Date.now();
     const severity = configuration.severity || SeverityLevels.ERROR;
 
     configuration.rules.forEach(rule => {
@@ -58,6 +60,7 @@ function execute(): void {
                     const errors = Colorizer.red('' + failedPaths);
                     LOG.info(`Linted ${lintedMessage} file(s), ${errors} didn't match pattern.`);
                 }
+                LOG.info(`Linting time: ${(Date.now() - startTime) / MILLISECONDS}s`);
             },
             onFile: (file): void => {
                 filesLinted++;
