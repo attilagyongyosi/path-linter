@@ -9,6 +9,7 @@ import { ExitCodes } from '../util/exit-codes';
 import { SeverityLevels } from '../config/severity-levels';
 import { Colorizer } from '../colorizer/colorizer';
 import { strip } from '../util/string.utils';
+import { resolveRegexp } from '../config/regexp-resolver';
 
 const LOG = new Logger();
 
@@ -39,15 +40,13 @@ function readConfiguration(): void {
     }
 }
 
-/**
- * @todo    at this point resolveRegexp() should have been called for logging purposes.
- */
 function execute(): void {
     const startTime = Date.now();
     const severity = configuration.severity || SeverityLevels.ERROR;
 
     configuration.rules.forEach(rule => {
-        const linter = new Linter(rule);
+        const regExp = resolveRegexp(rule);
+        const linter = new Linter(regExp);
 
         let failedPaths: number = 0;
 
