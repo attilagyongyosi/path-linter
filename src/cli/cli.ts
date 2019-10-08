@@ -8,6 +8,7 @@ import { processCliOptions } from './options/cli-options-processor';
 import { ExitCodes } from '../util/exit-codes';
 import { SeverityLevels } from '../config/severity-levels';
 import { Colorizer } from '../colorizer/colorizer';
+import { strip } from '../util/string.utils';
 
 const LOG = new Logger();
 
@@ -64,8 +65,10 @@ function execute(): void {
                 LOG.info(`Linting time: ${(Date.now() - startTime) / MILLISECONDS}s`);
             },
             onFile: (file): void => {
+                const strippedPath = strip(file, ...rule.ignore || []);
+
                 filesLinted++;
-                if (!linter.lint(file)) {
+                if (!linter.lint(strippedPath)) {
                     if (severity === SeverityLevels.ERROR) {
                         LOG.error(`${Colorizer.blue(file)} does not match ${Colorizer.cyan(rule.rule)}!`);
                         process.exitCode = ExitCodes.ERROR;
