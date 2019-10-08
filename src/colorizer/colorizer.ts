@@ -10,23 +10,23 @@ const ANSI_REGEX = [
 ].join('|');
 
 export class Colorizer {
-    public static green(text: string): string {
+    public static green(text: string | number): string {
         return Colorizer.colorize(text, AnsiColors.GREEN);
     }
 
-    public static red(text: string): string {
+    public static red(text: string | number): string {
         return Colorizer.colorize(text, AnsiColors.RED);
     }
 
-    public static blue(text: string): string {
+    public static blue(text: string | number): string {
         return Colorizer.colorize(text, AnsiColors.BLUE);
     }
 
-    public static yellow(text: string): string {
+    public static yellow(text: string | number): string {
         return Colorizer.colorize(text, AnsiColors.YELLOW);
     }
 
-    public static cyan(text: string): string {
+    public static cyan(text: string | number): string {
         return Colorizer.colorize(text, AnsiColors.CYAN);
     }
 
@@ -34,7 +34,7 @@ export class Colorizer {
         return message.replace(new RegExp(ANSI_REGEX, 'g'), '');
     }
 
-    private static colorize(text: string, color: AnsiColors): string {
+    private static colorize(text: string | number, color: AnsiColors): string {
         return `${color}${text}${AnsiColors.RESET}`;
     }
 }

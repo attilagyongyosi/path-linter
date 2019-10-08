@@ -1,6 +1,6 @@
 import { Colorizer } from '../colorizer';
 
-describe('Color Code Utils', () => {
+describe('Colorizer', () => {
     describe('deColorize() function', () => {
         it('should remove color sequences from strings', () => {
             let testString = `${Colorizer.blue('Whatever')}`;

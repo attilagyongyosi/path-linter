@@ -56,13 +56,13 @@ function execute(): void {
             onFinish: (): void => {
                 LOG.info(`Finished linting ${Colorizer.blue(rule.directory)}!`);
                 if (!failedPaths) {
-                    LOG.info(`Linted ${Colorizer.green(filesLinted + '')} file(s), no errors.`);
+                    LOG.info(`Linted ${Colorizer.green(filesLinted)} file(s), no errors.`);
                 } else {
-                    const lintedMessage = Colorizer.green(filesLinted + '');
-                    const errors = Colorizer.red('' + failedPaths);
+                    const lintedMessage = Colorizer.green(filesLinted);
+                    const errors = Colorizer.red(failedPaths);
                     LOG.info(`Linted ${lintedMessage} file(s), ${errors} didn't match pattern.`);
                 }
-                LOG.info(`Linting time: ${(Date.now() - startTime) / MILLISECONDS}s`);
+                LOG.info(`Linting time: ${Colorizer.blue((Date.now() - startTime) / MILLISECONDS)}s`);
             },
             onFile: (file): void => {
                 const strippedPath = strip(file, ...rule.ignore || []);

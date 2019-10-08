@@ -21,4 +21,11 @@ describe('Logger Integration Suite', () => {
         log.error('Message');
         expect(console.error).toHaveBeenNthCalledWith(1, `[${Colorizer.red('error')}] Message`);
     });
+
+    it('should log de-colorized error message', () => {
+        const logger = new Logger();
+        spyOn(console, 'info').and.callThrough();
+        logger.info(`${Colorizer.cyan('Yo')}, this is a ${Colorizer.blue('test')}`);
+        expect(console.info).toHaveBeenNthCalledWith(1, '[info] Yo, this is a test');
+    });
 });
