@@ -19,7 +19,7 @@
         "release:patch": "release-it patch",
         "release:minor": "release-it minor",
         "release:major": "release-it major",
-        "release:major:pre": "npm run release:major --preRelease=rc"
+        "release:major:pre": "npm run release:major -- --preRelease=rc"
     },
     "files": [
         "lib"
