@@ -12,7 +12,7 @@ Lightweight, zero-dependency library to lint file paths in a project.
     3. [Ignoring Parts of Paths](#ignoring-parts)
     4. [Example Config](#example-config)
 5. [🔄 Usage](#usage)
-6. [👨‍👦 Contributing](#contributing)
+6. [👦 Contributing](#contributing)
 7. [👨 Authors](#authors)
 8. [📄 License](#license)
 
@@ -124,7 +124,7 @@ Specifies the relative path to a configuration file. If not specified, the libra
 `--colorize`  
 Enables colorization for the console output.
 
-## 6. 👨‍👦 Contributing <a name="contributing"></a>
+## 6. ‍👦 Contributing <a name="contributing"></a>
 Feel free to open issues or pull requests if you have some improvement on the library. I'm open to everything!
 
 ## 7. 👨 Authors <a name="authors"></a>
