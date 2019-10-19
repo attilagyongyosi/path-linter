@@ -24,6 +24,8 @@
 9. [📣 Shout-outs](#shoutouts)
 
 ## 1. ❔ But Why? <a name="but-why"></a>
+> Consistency is always the best teacher
+
 Well, my therapist says that I'm a bit too keen on static analysis.
 I can't really help it though, so recently, I started to look for a way to
 enforce a file naming convention for a big software project.
