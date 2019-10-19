@@ -1,7 +1,8 @@
 {
-    "severity": "warning",
+    "severity": "error",
     "rules": [{
         "directory": "src",
-        "rule": "kebab-case"
+        "rule": "kebab-case",
+        "ignore": [ "__tests__", "__mocks__" ]
     }]
 }
