@@ -7,7 +7,8 @@ describe('Config Validator', () => {
         const config = {
             rules: [ {
                 directory: './directory',
-                rule: SupportedCaseConventions.KEBAB_CASE
+                rule: SupportedCaseConventions.KEBAB_CASE,
+                ignore: [ '__tests__' ]
             }, {
                 directory: './an/other',
                 rule: /.*/
@@ -50,5 +51,10 @@ describe('Config Validator', () => {
     it('should throw error on an invalid severity property', () => {
         const config = { severity: 'funky', rules: [] };
         expect(() => validate(config)).toThrow(ValidatorErrors.WRONG_SEVERITY);
+    });
+
+    it('should throw an error when there is an ignore property which is not an array', () => {
+        const config = { rules: [ { directory: '', rule: '.*',  ignore: 'test' } ] };
+        expect(() => validate(config)).toThrow(ValidatorErrors.IGNORE_IS_NOT_ARRAY);
     });
 });
