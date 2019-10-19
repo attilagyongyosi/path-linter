@@ -24,5 +24,5 @@ module.exports = {
     },
     collectCoverageFrom: [ 'src/**/*.ts', '!**/cli/**/*.*', '!**/*.ispec.ts', '!src/index.ts' ],
     coverageDirectory: './generated/jest-coverage/unit',
-    coverageReporters: [ 'html', 'text-summary' ]
+    coverageReporters: [ 'html', 'text-summary', 'json-summary' ]
 };

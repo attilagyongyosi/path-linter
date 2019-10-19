@@ -1,7 +1,12 @@
 [![npm version](https://badge.fury.io/js/%40attilagyongyosi%2Fpath-linter.svg)](https://badge.fury.io/js/%40attilagyongyosi%2Fpath-linter)
 
+[![unit test coverage lines](badges/coverage-unit/badge-lines.svg)]()
+[![unit test coverage functions](badges/coverage-unit/badge-functions.svg)]()
+[![unit test coverage statements](badges/coverage-unit/badge-statements.svg)]()
+[![unit test coverage branches](badges/coverage-unit/badge-branches.svg)]()
+
 # @attilagyongyosi/path-linter
-Lightweight, zero-dependency library to lint file paths in a project.
+> Lightweight, zero-dependency library to lint file paths in a project.
 
 1. [❔ But Why?](#but-why)
 2. [❤ Neat Things](#neat-things)

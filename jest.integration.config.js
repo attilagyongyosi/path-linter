@@ -12,5 +12,5 @@ module.exports = {
     transform: { '^.+\\.ts$': 'ts-jest' },
     collectCoverage: true,
     coverageDirectory: './generated/jest-coverage/integration',
-    coverageReporters: [ 'html', 'text-summary' ]
+    coverageReporters: [ 'html', 'text-summary', 'json-summary' ]
 };
