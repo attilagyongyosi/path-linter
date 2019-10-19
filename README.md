@@ -20,6 +20,8 @@
 6. [👦 Contributing](#contributing)
 7. [👨 Authors](#authors)
 8. [📄 License](#license)
+9. [📈 Future Improvements](#future-improvements)
+9. [📣 Shout-outs](#shoutouts)
 
 ## 1. ❔ But Why? <a name="but-why"></a>
 Well, my therapist says that I'm a bit too keen on static analysis.
@@ -137,3 +139,11 @@ Feel free to open issues or pull requests if you have some improvement on the li
 
 ## 8. 📄 License <a name="license"></a>
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## 9. 📈 Future Improvements <a name="future-improvements"></a>
+* Support for programmatic usage
+* Support for opt-in path auto-fixing
+* Support for `camelCase`, `dot.notation` and `snake_case`
+
+## 10. 📣 Shout-outs <a name="shoutouts"></a>
+* Thanks [pamepeixinho](https://github.com/pamepeixinho) for the [Jest coverage badges](https://github.com/pamepeixinho/jest-coverage-badges)!
