@@ -25,6 +25,11 @@ export class FileVisitorBuilder {
         return this;
     }
 
+    public ignoredFiles(ignoredFiles: string[] = []): FileVisitorBuilder {
+        this.config.ignoreFiles = ignoredFiles;
+        return this;
+    }
+
     public build(): FileVisitor {
         return new FileVisitor(this.config as FileVisitorConfig);
     }

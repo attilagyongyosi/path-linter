@@ -1,21 +1,18 @@
 import * as fs from 'fs';
 import { FileVisitor } from '../file-visitor';
-import { FileVisitorConfig } from '../file-visitor-config';
 
 const FIXTURE_PATH: string = 'test/fixture';
 
 describe('FileVisitor', () => {
-    const CONFIG: FileVisitorConfig = {
-        onFile: () => {},
-        onFinish: () => {},
-        onError: console.error,
-        ignoreFiles: [ '.gitkeep' ]
-    };
-
     let visitor: FileVisitor;
 
     beforeEach(() => {
-        visitor = new FileVisitor(CONFIG);
+        visitor = FileVisitor.builder()
+            .onFile(() => {})
+            .onError(console.error)
+            .onFinish(() => {})
+            .ignoredFiles([ '.gitkeep' ])
+            .build();
     });
 
     it('should call function when encountering files', (done) => {
