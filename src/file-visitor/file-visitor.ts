@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs';
 import { FileVisitorConfig } from './file-visitor-config';
+import { FileVisitorBuilder } from './file-visitor-builder';
 
 /**
  * Instances of this class can be used to walk
@@ -27,6 +28,10 @@ export class FileVisitor {
      */
     get visitorConfig(): FileVisitorConfig {
         return this.config;
+    }
+
+    public static builder(): FileVisitorBuilder {
+        return new FileVisitorBuilder();
     }
 
     public walk(root: string): void {

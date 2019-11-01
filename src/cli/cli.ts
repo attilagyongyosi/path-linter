@@ -51,19 +51,8 @@ function execute(): void {
         let failedPaths: number = 0;
 
         LOG.info(`Started linting ${Colorizer.blue(rule.directory)}...`);
-        new FileVisitor({
-            onFinish: (): void => {
-                LOG.info(`Finished linting ${Colorizer.blue(rule.directory)}!`);
-                if (!failedPaths) {
-                    LOG.info(`Linted ${Colorizer.green(filesLinted)} file(s), no errors.`);
-                } else {
-                    const lintedMessage = Colorizer.green(filesLinted);
-                    const errors = Colorizer.red(failedPaths);
-                    LOG.info(`Linted ${lintedMessage} file(s), ${errors} didn't match pattern.`);
-                }
-                LOG.info(`Linting time: ${Colorizer.blue((Date.now() - startTime) / MILLISECONDS)}s`);
-            },
-            onFile: (file): void => {
+        FileVisitor.builder()
+            .onFile((file): void => {
                 const strippedPath = strip(file, ...rule.ignore || []);
 
                 filesLinted++;
@@ -76,13 +65,24 @@ function execute(): void {
                     }
                     failedPaths++;
                 }
-            },
-            onError: (error): void => {
+            })
+            .onError((error): void => {
                 LOG.error(error.message);
                 process.exit(ExitCodes.ERROR);
-            },
-            ignoreFiles: []
-        }).walk(rule.directory);
+            })
+            .onFinish((): void => {
+                LOG.info(`Finished linting ${Colorizer.blue(rule.directory)}!`);
+                if (!failedPaths) {
+                    LOG.info(`Linted ${Colorizer.green(filesLinted)} file(s), no errors.`);
+                } else {
+                    const lintedMessage = Colorizer.green(filesLinted);
+                    const errors = Colorizer.red(failedPaths);
+                    LOG.info(`Linted ${lintedMessage} file(s), ${errors} didn't match pattern.`);
+                }
+                LOG.info(`Linting time: ${Colorizer.blue((Date.now() - startTime) / MILLISECONDS)}s`);
+            })
+            .build()
+            .walk(rule.directory);
     });
 }
 
