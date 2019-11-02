@@ -4,9 +4,14 @@
  *
  * @author  attilagyongyosi
  */
-export interface LintingResult {
+export interface DirectoryLintingResult {
     directory: string;
     filesLinted: number;
     mismatchingFiles: string[];
+    executionTime: number;
+}
+
+export interface LintingResult {
+    results: DirectoryLintingResult[];
     executionTime: number;
 }

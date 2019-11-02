@@ -10,6 +10,7 @@
     },
     "rules": {
         "@typescript-eslint/no-inferrable-types": 0,
-        "@typescript-eslint/no-explicit-any": 2
+        "@typescript-eslint/no-explicit-any": 2,
+        "max-classes-per-file": "error"
     }
 }
