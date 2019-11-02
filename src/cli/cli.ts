@@ -17,7 +17,6 @@ const CLI_OPTIONS_INDEX: number = 2;
 const MILLISECONDS: number = 1000;
 
 let cliOptions: CliOptions = new CliOptions();
-let configuration: Config = { rules: [] };
 let filesLinted: number = 0;
 
 function parseArguments(): void {
@@ -30,21 +29,25 @@ function parseArguments(): void {
     }
 }
 
-function readConfiguration(): void {
+function readConfiguration(): Config {
+    let config: Config = { rules: [] };
+
     try {
         const configPathArg = cliOptions.configFile;
-        configuration = ConfigReader.read(configPathArg);
+        config = ConfigReader.read(configPathArg);
     } catch(error) {
         LOG.error(`Failed to read configuration file! Reason: ${error.message}`);
         process.exit(ExitCodes.ERROR);
     }
+
+    return config;
 }
 
-function execute(): void {
+function execute(config: Config): void {
     const startTime = Date.now();
-    const severity = configuration.severity || SeverityLevels.ERROR;
+    const severity = config.severity || SeverityLevels.ERROR;
 
-    configuration.rules.forEach(rule => {
+    config.rules.forEach(rule => {
         const regExp = resolveRegexp(rule);
         const linter = new Linter(regExp);
 
@@ -87,5 +90,4 @@ function execute(): void {
 }
 
 parseArguments();
-readConfiguration();
-execute();
+execute(readConfiguration());
