@@ -8,9 +8,9 @@ describe('FileVisitor', () => {
 
     beforeEach(() => {
         visitor = FileVisitor.builder()
-            .onFile(() => {})
+            .onFile(() => { /**/ })
             .onError(console.error)
-            .onFinish(() => {})
+            .onFinish(() => { /**/ })
             .ignoredFiles([ '.gitkeep' ])
             .build();
     });
