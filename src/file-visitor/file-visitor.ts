@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { FileVisitorConfig } from './file-visitor-config';
 import { FileVisitorBuilder } from './file-visitor-builder';
+import { FileVisitorResult } from './file-visitor-result';
 
 /**
  * Instances of this class can be used to walk
@@ -16,7 +17,9 @@ export class FileVisitor {
      * Inner counter to keep track if we've visited
      * every file in the given folder recursively.
      */
-    private numberOfFiles: number = 0;
+    private result: FileVisitorResult = {
+        filesVisited: 0
+    };
 
     constructor(private config: FileVisitorConfig) {}
 
@@ -34,8 +37,9 @@ export class FileVisitor {
         return new FileVisitorBuilder();
     }
 
-    public walk(root: string): void {
-        return this.walkDirectory(root);
+    public walk(root: string): FileVisitorResult {
+        this.walkDirectory(root);
+        return this.result;
     }
 
     private walkDirectory(parentPath: string): void {
@@ -44,12 +48,12 @@ export class FileVisitor {
         fs.readdir(currentPath, (error, files = []) => {
             if (error) { return this.config.onError(error); }
 
-            if (this.numberOfFiles) { --this.numberOfFiles; }
+            if (this.result.filesVisited) { --this.result.filesVisited; }
 
             files = files.filter(file => !this.config.ignoreFiles.includes(file));
 
-            this.numberOfFiles += files.length;
-            if (this.numberOfFiles === 0) {
+            this.result.filesVisited += files.length;
+            if (this.result.filesVisited === 0) {
                 return this.config.onFinish();
             }
 
@@ -68,9 +72,9 @@ export class FileVisitor {
             }
 
             this.config.onFile(path);
-            --this.numberOfFiles;
+            --this.result.filesVisited;
 
-            if (this.numberOfFiles === 0) {
+            if (this.result.filesVisited === 0) {
                 return this.config.onFinish();
             }
         });
