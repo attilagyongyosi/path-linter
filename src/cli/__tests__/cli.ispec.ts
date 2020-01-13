@@ -6,6 +6,7 @@ import { ValidatorErrors } from '../../config/validator/config-validator-errors'
 
 const TEST_CONFIG_BASE: string = 'test/configs';
 
+// @todo change tests from using 'toContain()' to something more exact, preferably based on pre-defined messages.
 async function testRun(configFile: string, expectedResult: RunOutput, done: Function): Promise<void> {
     const result = await run([ CliSwitches.CONFIG, configFile ]);
     expect(result.code).toBe(expectedResult.code);
@@ -32,6 +33,15 @@ describe('CLI End-to-End', () => {
         };
         testRun(`${TEST_CONFIG_BASE}/kebab.config.json`, expected, done);
     })
+
+    it('should lint kebab-correct folder with ignoring a full path', done => {
+        const expected: RunOutput = {
+            code: ExitCodes.OK,
+            stdout: 'Linted 3 file(s)',
+            stderr: ''
+        };
+        testRun(`${TEST_CONFIG_BASE}/kebab-ignore-full-path.config.json`, expected, done);
+    });
 
     it('should fail with 1 linting error in should-fail folder', done => {
         const expected: RunOutput = {

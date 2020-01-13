@@ -1,0 +1,7 @@
+{
+    "rules": [{
+        "directory": "test/fixture/kebab-correct",
+        "rule": "kebab-case",
+        "ignore": [ "__tests__", "__mocks__", "sub/another-sub/whatever.txt" ]
+    }]
+}

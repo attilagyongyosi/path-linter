@@ -67,6 +67,7 @@ function execute(): void {
                 const strippedPath = strip(file, ...rule.ignore || []);
 
                 filesLinted++;
+
                 if (!linter.lint(strippedPath)) {
                     if (severity === SeverityLevels.ERROR) {
                         LOG.error(`${Colorizer.blue(file)} does not match ${Colorizer.cyan(rule.rule)}!`);
