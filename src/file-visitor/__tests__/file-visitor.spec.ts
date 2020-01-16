@@ -6,8 +6,8 @@ const FIXTURE_PATH: string = 'test/fixture';
 
 describe('FileVisitor', () => {
     const CONFIG: FileVisitorConfig = {
-        onFile: () => {},
-        onFinish: () => {},
+        onFile: () => { /**/ },
+        onFinish: () => { /**/ },
         onError: console.error,
         ignoreFiles: [ '.gitkeep' ]
     };
