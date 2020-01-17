@@ -9,8 +9,8 @@ export function run(args: string[]): Promise<RunOutput> {
         let stdout = '';
         let stderr = '';
 
-        cli.stdout.on('data', (data) => { stdout += data; });
-        cli.stderr.on('data', (data) => { stderr += data; });
+        cli.stdout?.on('data', (data) => { stdout += data; });
+        cli.stderr?.on('data', (data) => { stderr += data; });
         cli.on('close', (code) => resolve({ code, stdout, stderr }));
     });
 }
