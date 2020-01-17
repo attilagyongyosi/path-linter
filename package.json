@@ -10,7 +10,7 @@
         "lint:ts": "eslint src/**/*.ts",
         "lint:paths": "path-linter --colorize",
         "lint": "run-p lint:*",
-        "build": "parcel build src/index.ts --no-source-maps --target node --out-dir lib && chmod +x lib/index.js",
+        "build": "parcel build src/index.ts --no-source-maps --target node --out-dir lib",
         "test-run:default": "yarn build && node lib/index.js",
         "test-run": "yarn build && node lib/index.js --config sample-config.json --colorize",
         "test:unit": "jest --runInBand && yarn test:badges:unit",
