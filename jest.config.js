@@ -13,6 +13,7 @@ module.exports = {
         '**/+(*.)+spec.+ts'
     ],
     transform: { '^.+\\.ts$': 'ts-jest' },
+    clearMocks: true,
     collectCoverage: true,
     coverageThreshold: {
         global: {
