@@ -1,9 +1,15 @@
 language: node_js
+
 os:
     - linux
     - windows
+
 node_js:
     - '10'
 
+env:
+    - YARN_GPG=no
+
 dist: trusty
+
 sudo: false
