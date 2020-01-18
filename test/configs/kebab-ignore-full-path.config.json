@@ -2,6 +2,10 @@
     "rules": [{
         "directory": "test/fixture/kebab-correct",
         "rule": "kebab-case",
-        "ignore": [ "__tests__", "__mocks__", "sub/another-sub/whatever.txt" ]
+        "ignore": [
+            "__tests__",
+            "__mocks__",
+            "test/fixture/kebab-correct/sub/another-sub/whatever.txt"
+        ]
     }]
 }
