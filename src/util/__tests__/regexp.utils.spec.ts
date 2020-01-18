@@ -5,7 +5,7 @@ describe('RegExp Utils', () => {
         it('should escape special characters', () => {
             expect(escape('.wat')).toBe('\\.wat');
             expect(escape('path/like/')).toBe('path\\/like\\/');
-            expect(escape('wa&t')).toBe('wa\\&t');
+            expect(escape('wa$t')).toBe('wa\\&t');
         });
 
         it('should leave string without special chars unchanged', () => {
