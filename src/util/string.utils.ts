@@ -1,5 +1,9 @@
 export const EMPTY_STRING: string = '';
 
+export function escape(string: string): string {
+    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+}
+
 /**
  * Strips away a set of substrings from a given string.
  *
@@ -13,6 +17,6 @@ export const EMPTY_STRING: string = '';
  * @author  attilagyongyosi
  */
 export function strip(text: string = '', ...toStrip: string[]): string {
-    const replaceRegexp = new RegExp(toStrip.reduce((regexp, current) => `${regexp}${current}|`, EMPTY_STRING), 'g');
+    const replaceRegexp = new RegExp(toStrip.reduce((regexp, current) => `${regexp}${escape(current)}|`, EMPTY_STRING), 'g');
     return text.replace(replaceRegexp, EMPTY_STRING);
 }
