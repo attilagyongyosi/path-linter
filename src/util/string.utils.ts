@@ -1,8 +1,6 @@
-export const EMPTY_STRING: string = '';
+import { escape } from './regexp.utils';
 
-export function escape(string: string): string {
-    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
-}
+export const EMPTY_STRING: string = '';
 
 /**
  * Strips away a set of substrings from a given string.
