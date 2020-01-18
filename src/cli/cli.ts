@@ -10,6 +10,7 @@ import { SeverityLevels } from '../config/severity-levels';
 import { Colorizer } from '../colorizer/colorizer';
 import { strip } from '../util/string.utils';
 import { resolveRegexp } from '../config/regexp-resolver';
+import { convertPathSeparators } from '../util/path.utils';
 
 const LOG = new Logger();
 
@@ -64,7 +65,10 @@ function execute(): void {
                 LOG.info(`Linting time: ${Colorizer.blue((Date.now() - startTime) / MILLISECONDS)}s`);
             },
             onFile: (file): void => {
-                const strippedPath = strip(file, ...rule.ignore || []);
+                const normalizedIgnores = rule.ignore?.map(convertPathSeparators);
+                const strippedPath = strip(file, ...normalizedIgnores || []);
+
+                if (!strippedPath) { return; }
 
                 filesLinted++;
 
