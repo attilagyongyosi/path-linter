@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@attilagyongyosi/eslint-config@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@attilagyongyosi/eslint-config/-/eslint-config-0.3.0.tgz#1cf47fba2ea052dba5e81145d92211153b96d3d3"
-  integrity sha512-80Jwb+nvWi93buGEA048b7Q3OYyzrbrTSfpsFBOZvXScp0nQwQPdJ7UuuIOfBxQdE5ewtTQdQRMKiPLdcwsxFg==
+"@attilagyongyosi/eslint-config@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@attilagyongyosi/eslint-config/-/eslint-config-0.4.0.tgz#651170cf8470899b46d9e3bd7d71b3c1b2880839"
+  integrity sha512-noVwfGjCdKRrU2sgwRgAuiMRPF2+JtISeNj8ddAxgyN2k6hR9yLF2egIPzARbmHpKu0FOGyxauI2Ik3aJDPuwQ==
 
 "@attilagyongyosi/path-linter@2.0.0":
   version "2.0.0"

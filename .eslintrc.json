@@ -10,6 +10,6 @@
     },
     "rules": {
         "@typescript-eslint/no-inferrable-types": 0,
-        "@typescript-eslint/no-explicit-any": 2
+        "@typescript-eslint/no-explicit-any": "error"
     }
 }

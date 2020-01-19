@@ -11,7 +11,7 @@ const TEST_CONFIG_BASE: string = 'test/configs';
 async function testRun(configFile: string, expectedResult: RunOutput, done: Function): Promise<void> {
     let options: string[] = [];
 
-    if (configFile) { options = [ CliSwitches.CONFIG, configFile ] }
+    if (configFile) { options = [ CliSwitches.CONFIG, configFile ]; }
 
     const result = await run(options);
     expect(result.code).toBe(expectedResult.code);
@@ -46,7 +46,7 @@ describe('CLI End-to-End', () => {
             stdout: 'Linted 4 file(s)'
         };
         testRun(`${TEST_CONFIG_BASE}/kebab.config.json`, expected, done);
-    })
+    });
 
     it('should lint kebab-correct folder with ignoring a full path', done => {
         const expected: RunOutput = {

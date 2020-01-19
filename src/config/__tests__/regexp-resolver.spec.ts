@@ -19,5 +19,5 @@ describe('Config Rule Regexp Resolver', () => {
         };
 
         expect(resolveRegexp(TEST_KEBAB_RULE)).toBe(CONVENTION_MAP[SupportedCaseConventions.KEBAB_CASE]);
-    })
+    });
 });
