@@ -1,5 +1,6 @@
 import * as os from 'os';
+import { SupportedPlatforms } from './supported-platforms';
 
 export function isWindows(): boolean {
-    return os.platform() === 'win32';
+    return os.platform() === SupportedPlatforms.WINDOWS;
 }
