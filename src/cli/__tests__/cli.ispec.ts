@@ -3,12 +3,17 @@ import { ExitCodes } from '../../util/exit-codes';
 import { RunOutput } from '../../../test/utils/cli-run-output';
 import { CliSwitches } from '../options/cli-switches.enum';
 import { ValidatorErrors } from '../../config/validator/config-validator-errors';
+import { EMPTY_STRING } from '../../util/string.utils';
 
 const TEST_CONFIG_BASE: string = 'test/configs';
 
 // @todo change tests from using 'toContain()' to something more exact, preferably based on pre-defined messages.
 async function testRun(configFile: string, expectedResult: RunOutput, done: Function): Promise<void> {
-    const result = await run([ CliSwitches.CONFIG, configFile ]);
+    let options: string[] = [];
+
+    if (configFile) { options = [ CliSwitches.CONFIG, configFile ] }
+
+    const result = await run(options);
     expect(result.code).toBe(expectedResult.code);
     expect(result.stdout).toContain(expectedResult.stdout);
     expect(result.stderr).toContain(expectedResult.stderr);
@@ -16,6 +21,15 @@ async function testRun(configFile: string, expectedResult: RunOutput, done: Func
 }
 
 describe('CLI End-to-End', () => {
+    it('should use default config file path when none is specified', done => {
+        const expected: RunOutput = {
+            code: ExitCodes.OK,
+            stderr: EMPTY_STRING,
+            stdout: 'no errors'
+        };
+        testRun(EMPTY_STRING, expected, done);
+    });
+
     it('should halt when configuration file can not be read', done => {
         const expected: RunOutput = {
             code: ExitCodes.ERROR,
