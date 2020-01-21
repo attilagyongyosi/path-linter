@@ -1,8 +1,6 @@
 import { CliOptions } from './cli-options';
 import { CliSwitches } from './cli-switches.enum';
 
-export const DEFAULT_CONFIG_FILE_PATH: string = './path-linter.json';
-
 /**
  * Error messages for the CLI Options Processor function.
  */
@@ -33,13 +31,11 @@ export function processCliOptions(cliArgs: string[]): CliOptions {
 
     let configFilePath: string = '';
 
-    if (configOptionIndex === -1) {
-        configFilePath = DEFAULT_CONFIG_FILE_PATH;
-    } else {
+    if (configOptionIndex > -1) {
         configFilePath = cliArgs[configOptionIndex + 1];
     }
 
-    if (!configFilePath || configFilePath.startsWith('--')) {
+    if (configFilePath === undefined || configFilePath.startsWith('--')) {
         throw new Error(CLI_OPTIONS_MESSAGES.invalidConfig);
     }
 

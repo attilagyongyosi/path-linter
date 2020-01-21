@@ -1,8 +1,8 @@
-import { DEFAULT_CONFIG_FILE_PATH, processCliOptions } from '../cli-options-processor';
+import { CLI_OPTIONS_MESSAGES, processCliOptions } from '../cli-options-processor';
 import { CliOptions } from '../cli-options';
 
 describe('CLI Options Processor', () => {
-    it('should fall back to default when configuration argument is missing', () => {
+    it('should not fail when --config switch is not specified', () => {
         const args: string[] = [
             'test/server.js',
             '--colorize',
@@ -11,34 +11,26 @@ describe('CLI Options Processor', () => {
         ];
 
         const options: CliOptions = processCliOptions(args);
-        expect(options.configFile).toBe(DEFAULT_CONFIG_FILE_PATH);
+        expect(options.configFile).toBeFalsy();
     });
 
-    it('should fail when no configuration file path is given', () => {
+    it('should fail when --config switch is specified but no configuration file path is given', () => {
         const args: string[] = [
             'test/index.js',
             '--config'
         ];
 
-        try {
-            processCliOptions(args);
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
+        expect(() => processCliOptions(args)).toThrowError(CLI_OPTIONS_MESSAGES.invalidConfig);
     });
 
-    it('should fail when configuration path argument is another option', () => {
+    it('should fail when --config switch is specified but is followed by another switch', () => {
         const args: string[] = [
-            'lib.js',
+            'test/index.js',
             '--config',
             '--colorize'
         ];
 
-        try {
-            processCliOptions(args);
-        } catch (error) {
-            expect(error).toBeDefined();
-        }
+        expect(() => processCliOptions(args)).toThrowError(CLI_OPTIONS_MESSAGES.invalidConfig);
     });
 
     it('should create CliOptions object', () => {
