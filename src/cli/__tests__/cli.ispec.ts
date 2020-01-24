@@ -15,8 +15,9 @@ async function testRun(configFile: string, expectedResult: RunOutput, done: Func
 
     const result = await run(options);
 
-    console.info(result.stdout);
-    console.error(result.stderr);
+    if (expectedResult.code === ExitCodes.OK && result.code === ExitCodes.ERROR) {
+        console.error(result.stderr);
+    }
 
     expect(result.code).toBe(expectedResult.code);
     expect(result.stdout).toContain(expectedResult.stdout);

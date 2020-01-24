@@ -1,4 +1,4 @@
-const COVERAGE_THRESHOLD = 80;
+const COVERAGE_THRESHOLD = 60;
 
 module.exports = {
     testEnvironment: 'node',
