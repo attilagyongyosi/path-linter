@@ -39,4 +39,12 @@ describe('The Configuration Reader', () => {
             done();
         });
     });
+
+    it('should throw an error when default config paths are not found', done => {
+        spyOn(fileSystemUtils, 'findFile').and.callFake(() => context('non-existent.json'));
+        ConfigReader.read(EMPTY_STRING).catch(error => {
+            expect(error).toBeDefined();
+            done();
+        });
+    });
 });
