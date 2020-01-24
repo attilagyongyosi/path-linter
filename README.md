@@ -77,7 +77,7 @@ Place a file named `path-linter.json`, `.path-linter.json` or `.pathlinterrc` in
 and `path-linter` will detect them automatically.
 
 If your configuration is placed elsewhere or named otherwise, you can specify
-it with the `--config <config-file-path` CLI switch. See [Usage](<a name="#usage"></a>).
+it with the `--config <config-file-path>` CLI switch. See [5. Usage](#usage).
 
 ### 4.2 Built-in Naming Convention Support <a name="built-in-conventions"></a>
 `path-linter` supports the following naming conventions, so you don't need to configure a
