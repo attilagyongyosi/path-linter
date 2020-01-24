@@ -14,10 +14,11 @@
 2. [❤ Neat Things](#neat-things)
 3. [⚙ Installing](#installing)
 4. [🛠 Configuration](#configuration)
-    1. [Built-in Naming Convention Support](#built-in-conventions)
-    2. [Linting Severity](#severity)
-    3. [Ignoring Parts of Paths](#ignoring-parts)
-    4. [Example Config](#example-config)
+    1. [Configuration File](#configuration-file)
+    2. [Built-in Naming Convention Support](#built-in-conventions)
+    3. [Linting Severity](#severity)
+    4. [Ignoring Parts of Paths](#ignoring-parts)
+    5. [Example Config](#example-config)
 5. [🔄 Usage](#usage)
 6. [👦 Contributing](#contributing)
 7. [👨 Authors](#authors)
@@ -40,13 +41,13 @@ For a while, I also wanted to do some open source project on my own, just for th
 of trying myself in this game.  
 So here it is!
 
-It is currently **~12kb in size**, comes with **no dependencies**. The size could be smaller, I sacrificed it a bit on the altar 
+It is currently **~18kb in size**, comes with **no dependencies**. The size could be smaller, I sacrificed it a bit on the altar 
 of structural well-being.
 
 Enjoy!
 
 ## 2. ❤ Neat Things <a name="neat-things"></a>
-* ~12kb package size
+* ~18kb package size
 * no dependencies
 * supports file extension linting
 * supports different naming convention per folder
@@ -71,18 +72,25 @@ You can specify different linting rules for different directories in your projec
 Rules can either be a regular expression or one of the built-in naming conventions that
 `path-linter` supports out of the box.
 
-### 4.1 Built-in Naming Convention Support <a name="built-in-conventions"></a>
+### 4.1 Configuration File <a name="configuration-file"></a>
+Place a file named `path-linter.json`, `.path-linter.json` or `.pathlinterrc` in your project root
+and `path-linter` will detect them automatically.
+
+If your configuration is placed elsewhere or named otherwise, you can specify
+it with the `--config <config-file-path` CLI switch. See [Usage](<a name="#usage"></a>).
+
+### 4.2 Built-in Naming Convention Support <a name="built-in-conventions"></a>
 `path-linter` supports the following naming conventions, so you don't need to configure a
 regular expression for them:
 - `kebab-case`
 
-### 4.2 Linting Severity <a name="severity"></a>
+### 4.3 Linting Severity <a name="severity"></a>
 You can configure linting severity in the top-level `severity` configuration property.  
 
 It is `error` by default which will fail the linting process when file path do not adhere
 to configured conventions, or can be `warning` to just log warnings on failing files.
 
-### 4.3 Ignoring Parts of the Paths <a name="ignoring-parts"></a>
+### 4.4 Ignoring Parts of the Paths <a name="ignoring-parts"></a>
 There are situations where you want to skip certain parts of a file path and not have them linted.
 
 One common example would be when you want your paths to adhere to `kebab-case` naming but you
@@ -92,7 +100,7 @@ the linting rule.
 To accommodate this situation, you can specify an `ignore` property for a linting rule config.
 This property should be an array of strings and `path-linter` will ignore these substrings in file paths.
 
-### 4.4 Example Config <a name="example-config"></a>
+### 4.5 Example Config <a name="example-config"></a>
 ```json
 {
     "severity": "warning",
