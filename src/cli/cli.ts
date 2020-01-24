@@ -31,10 +31,10 @@ function parseArguments(): void {
     }
 }
 
-function readConfiguration(): void {
+async function readConfiguration(): Promise<void> {
     try {
         const configPathArg = cliOptions.configFile;
-        configuration = ConfigReader.read(configPathArg);
+        configuration = await ConfigReader.read(configPathArg);
     } catch(error) {
         LOG.error(`Failed to read configuration file! Reason: ${error.message}`);
         process.exit(ExitCodes.ERROR);
@@ -92,5 +92,4 @@ function execute(): void {
 }
 
 parseArguments();
-readConfiguration();
-execute();
+readConfiguration().then(execute);

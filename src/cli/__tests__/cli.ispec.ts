@@ -14,6 +14,10 @@ async function testRun(configFile: string, expectedResult: RunOutput, done: Func
     if (configFile) { options = [ CliSwitches.CONFIG, configFile ]; }
 
     const result = await run(options);
+
+    console.info(result.stdout);
+    console.error(result.stderr);
+
     expect(result.code).toBe(expectedResult.code);
     expect(result.stdout).toContain(expectedResult.stdout);
     expect(result.stderr).toContain(expectedResult.stderr);

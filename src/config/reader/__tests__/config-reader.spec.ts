@@ -16,11 +16,17 @@ const EXPECTED_VALID_CONFIG = {
 };
 
 describe('The Configuration Reader', () => {
-    it('should read a valid config file', () => {
-        expect(ConfigReader.read(context('mock-valid-config.json'))).toEqual(EXPECTED_VALID_CONFIG);
+    it('should read a valid config file', done => {
+        ConfigReader.read(context('mock-valid-config.json')).then(config => {
+            expect(config).toEqual(EXPECTED_VALID_CONFIG);
+            done();
+        });
     });
 
-    it('should throw error for a non-existent file', () => {
-        expect(() => ConfigReader.read('./non-existent.json')).toThrow();
+    it('should throw error for a non-existent file', done => {
+        ConfigReader.read('./non-existent.json').catch(error => {
+            expect(error).toBeDefined();
+            done();
+        });
     });
 });

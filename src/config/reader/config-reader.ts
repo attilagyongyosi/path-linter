@@ -1,6 +1,8 @@
 import * as fs from 'fs';
+import fileSystemUtils from '../../util/filesystem/filesystem.utils';
 import { Config } from '../config';
 import { validate } from '../validator/config-validator';
+import { DEFAULT_CONFIG_PATHS } from '../default-config-paths';
 
 /**
  * Functional utility class which can
@@ -29,7 +31,11 @@ export class ConfigReader {
      * @throws  an error when the file can not be read or is
      *          malformed.
      */
-    public static read(configPath: string): Config {
+    public static async read(configPath: string): Promise<Config> {
+        if (!configPath) {
+            configPath = await fileSystemUtils.findFile('.', ...DEFAULT_CONFIG_PATHS);
+        }
+
         const data = fs.readFileSync(configPath, { encoding: 'utf-8' });
         const parsed = JSON.parse(data.toString());
         validate(parsed);
