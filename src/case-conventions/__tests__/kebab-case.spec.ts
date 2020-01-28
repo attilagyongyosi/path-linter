@@ -16,6 +16,11 @@ describe('Built-in kebab-case regexp', () => {
         pass('whatever.service.ts');
     });
 
+    it('should match kebab-case paths with numbers', () => {
+        pass('assets/logo-1920-1080px.jpeg');
+        pass('folder/dir/numbers-0123456789.txt');
+    });
+
     it('should fail on non-kebab-compliant paths', () => {
         fail('camelCase.ts');
         fail('snake_path/snake_file.jpg');
