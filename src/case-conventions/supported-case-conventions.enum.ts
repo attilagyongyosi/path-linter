@@ -11,5 +11,5 @@ export enum SupportedCaseConventions {
 }
 
 export const CONVENTION_MAP: { [key: string]: RegExp } = {
-    [SupportedCaseConventions.KEBAB_CASE.valueOf()]: new RegExp(/^[a-z1-9\-\\/.]+\.[a-z]{2,5}$/)
+    [SupportedCaseConventions.KEBAB_CASE.valueOf()]: new RegExp(/^[a-z0-9\-\\/.]+\.[a-z]{2,5}$/)
 };
