@@ -1,6 +1,0 @@
-{
-    "git": {
-        "requireUpstream": false,
-        "commitMessage": "build: release ${version}"
-    }
-}
