@@ -18,23 +18,15 @@ const CLI_OPTIONS_INDEX: number = 2;
 const MILLISECONDS: number = 1000;
 
 let cliOptions: CliOptions = new CliOptions();
-let configuration: Config = { rules: [] };
+let configuration: Config = { colorize: false, rules: [] };
 let filesLinted: number = 0;
-
-function parseArguments(): void {
-    try {
-        cliOptions = processCliOptions(process.argv.slice(CLI_OPTIONS_INDEX));
-        LOG.colorize = cliOptions.colorize || false;
-    } catch (cliOptionsError) {
-        LOG.error(cliOptionsError.message);
-        process.exit(ExitCodes.ERROR);
-    }
-}
 
 async function readConfiguration(): Promise<void> {
     try {
+        cliOptions = processCliOptions(process.argv.slice(CLI_OPTIONS_INDEX));
         const configPathArg = cliOptions.configFile;
         configuration = await ConfigReader.read(configPathArg);
+        LOG.colorize = configuration.colorize || cliOptions.colorize || false;
     } catch(error) {
         LOG.error(`Failed to read configuration file! Reason: ${error.message}`);
         process.exit(ExitCodes.ERROR);
@@ -91,5 +83,4 @@ function execute(): void {
     });
 }
 
-parseArguments();
 readConfiguration().then(execute);

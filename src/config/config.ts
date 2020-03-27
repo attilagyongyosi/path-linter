@@ -12,6 +12,7 @@ import { ConfigRule } from './config-rule';
 import { SeverityLevels } from './severity-levels';
 
 export interface Config {
+    colorize: boolean;
     severity?: SeverityLevels;
     rules: ConfigRule[];
 }

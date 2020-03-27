@@ -1,4 +1,5 @@
 {
+    "colorize": true,
     "severity": "warning",
     "rules": [{
         "directory": "lib",

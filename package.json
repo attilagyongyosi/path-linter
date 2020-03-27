@@ -11,7 +11,7 @@
         "lint": "run-p lint:*",
         "bundle": "rollup -c",
         "test-run:default": "yarn bundle && node lib/index.js",
-        "test-run": "yarn bundle && node lib/index.js --config sample-config.json --colorize",
+        "test-run": "yarn bundle && node lib/index.js --config sample-config.json",
         "test:unit": "jest --runInBand && yarn test:badges:unit",
         "test:integration": "yarn bundle && jest --runInBand -c jest.integration.config.js",
         "test:watch": "jest --runInBand --watchAll",
