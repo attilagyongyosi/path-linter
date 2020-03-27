@@ -1,4 +1,5 @@
-import {terser} from 'rollup-plugin-terser';
+import { terser } from 'rollup-plugin-terser';
+import shebang from 'rollup-plugin-add-shebang';
 import typescript from '@rollup/plugin-typescript';
 
 const SOURCE_DIR = 'src';
@@ -17,6 +18,9 @@ export default {
         'os'
     ],
     plugins: [
-        typescript()
+        typescript(),
+        shebang({
+            include: `${BUNDLE_DIR}/index.js`
+        })
     ]
 };
