@@ -41,13 +41,13 @@ For a while, I also wanted to do some open source project on my own, just for th
 of trying myself in this game.  
 So here it is!
 
-It is currently **~18kb in size**, comes with **no dependencies**. The size could be smaller, I sacrificed it a bit on the altar 
+It is currently **~7kb in size**, comes with **no dependencies**. The size could be smaller, I sacrificed it a bit on the altar 
 of structural well-being.
 
 Enjoy!
 
 ## 2. ❤ Neat Things <a name="neat-things"></a>
-* ~18kb package size
+* ~7kb package size
 * no dependencies
 * supports file extension linting
 * supports different naming convention per folder
@@ -103,6 +103,7 @@ This property should be an array of strings and `path-linter` will ignore these 
 ### 4.5 Example Config <a name="example-config"></a>
 ```json
 {
+    "colorize": true,
     "severity": "warning",
     "rules": [{
         "directory": "src",
@@ -127,6 +128,7 @@ For example:
     }
 }
 ```
+
 Then you can execute it with  
 ```bash
 npm run lint:paths
@@ -141,7 +143,8 @@ Specifies the relative path to a configuration file. If not specified, the libra
 `path-linter.json` file in the project root.
 
 `--colorize`  
-Enables colorization for the console output.
+Enables colorization for the console output.  
+This can also be set in the configuration file's `colorize` property.
 
 ## 6. ‍👦 Contributing <a name="contributing"></a>
 Feel free to open issues or pull requests if you have some improvement on the library. I'm open to everything!
