@@ -45,7 +45,7 @@ function validateRule(rule: ConfigRule): void {
     checkIgnoreProperty(rule);
 }
 
-export function validate(parsedConfig: { [key: string]: Record<string, unknown> | string }): boolean {
+export function validate(parsedConfig: Record<string, unknown>): boolean {
     if (!parsedConfig.hasOwnProperty(PROPERTY_RULES)) {
         throw new Error(ValidatorErrors.NO_RULES);
     }
