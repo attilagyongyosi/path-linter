@@ -45,7 +45,7 @@ function validateRule(rule: ConfigRule): void {
     checkIgnoreProperty(rule);
 }
 
-export function validate(parsedConfig: { [key: string]: object | string }): boolean {
+export function validate(parsedConfig: { [key: string]: Record<string, unknown> | string }): boolean {
     if (!parsedConfig.hasOwnProperty(PROPERTY_RULES)) {
         throw new Error(ValidatorErrors.NO_RULES);
     }
@@ -54,7 +54,7 @@ export function validate(parsedConfig: { [key: string]: object | string }): bool
         checkSeverity(parsedConfig[PROPERTY_SEVERITY] as string);
     }
 
-    const rules: ConfigRule[] = parsedConfig[PROPERTY_RULES] as ConfigRule[];
+    const rules: ConfigRule[] = parsedConfig[PROPERTY_RULES] as unknown as ConfigRule[];
     rules.forEach(validateRule);
     return true;
 }
