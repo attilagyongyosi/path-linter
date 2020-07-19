@@ -4,11 +4,12 @@ import { RunOutput } from '../../../test/utils/cli-run-output';
 import { CliSwitches } from '../options/cli-switches.enum';
 import { ValidatorErrors } from '../../config/validator/config-validator-errors';
 import { EMPTY_STRING } from '../../util/string.utils';
+import DoneCallback = jest.DoneCallback;
 
 const TEST_CONFIG_BASE: string = 'test/configs';
 
 // @todo change tests from using 'toContain()' to something more exact, preferably based on pre-defined messages.
-async function testRun(configFile: string, expectedResult: RunOutput, done: Function): Promise<void> {
+async function testRun(configFile: string, expectedResult: RunOutput, done: DoneCallback): Promise<void> {
     let options: string[] = [];
 
     if (configFile) { options = [ CliSwitches.CONFIG, configFile ]; }
