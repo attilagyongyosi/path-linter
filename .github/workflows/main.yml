@@ -13,17 +13,10 @@ jobs:
             - name: Checkout Code
               uses: actions/checkout@v2
 
-            - name: Install Dependencies
-              uses: Borales/actions-yarn@v2.1.0
+            - name: Install Dependencies, Run tests & build
+              uses: actions/setup-node@v1
               with:
-                  cmd: install
-
-            - name: Executes Tests
-              uses: Borales/actions-yarn@v2.1.0
-              with:
-                  cmd: test
-
-            - name: Build Production Package
-              uses: Borales/actions-yarn@v2.1.0
-              with:
-                  cmd: build
+                  node-version: ${{ matrix.node }}
+            - run: yarn install
+            - run: yarn test
+            - run: yarn build
