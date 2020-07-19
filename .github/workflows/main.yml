@@ -1,0 +1,29 @@
+name: CI
+
+on:
+    push: branches
+
+jobs:
+    build:
+        strategy:
+            matrix:
+                node: [ 12 ]
+                os: [ ubuntu-latest, windows-latest ]
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+
+            - name: Install Dependencies
+              uses: Borales/actions-yarn@v2.1.0
+              with:
+                  cmd: install
+
+            - name: Executes Tests
+              uses: Borales/actions-yarn@v2.1.0
+              with:
+                  cmd: test
+
+            - name: Build Production Package
+              uses: Borales/actions-yarn@v2.1.0
+              with:
+                  cmd: build
