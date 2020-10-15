@@ -1,6 +1,6 @@
 module.exports = {
     git: {
         requireUpstream: false,
-        commitMessage: 'build: release v${version} [ci skip]'
+        commitMessage: 'build: release v${version}'
     }
 };

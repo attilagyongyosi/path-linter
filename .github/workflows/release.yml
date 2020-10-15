@@ -1,0 +1,16 @@
+name: Release new version
+
+on:
+    workflow_dispatch:
+        inputs:
+            type:
+                description: 'Semver component to bump and release'
+                required: true
+                default: 'minor'
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Release new version
+              run: yarn release ${{ github.event.inputs.type }}

@@ -18,10 +18,7 @@
         "test:watch": "jest --runInBand --watchAll",
         "test": "yarn test:unit && yarn test:integration",
         "test:badges:unit": "yarn jest-coverage-badges --input generated/jest-coverage/unit/coverage-summary.json --output badges/coverage-unit",
-        "release:patch": "release-it patch",
-        "release:minor": "release-it minor",
-        "release:major": "release-it major",
-        "release:major:pre": "npm run release:major -- --preRelease=rc"
+        "release": "release-it"
     },
     "files": [
         "lib"
