@@ -1,6 +1,6 @@
 [![npm version](https://badge.fury.io/js/%40attilagyongyosi%2Fpath-linter.svg)](https://badge.fury.io/js/%40attilagyongyosi%2Fpath-linter)
 
-[![Build Status](https://travis-ci.com/attilagyongyosi/path-linter.svg?branch=master)](https://travis-ci.com/attilagyongyosi/path-linter)
+![CI](https://github.com/attilagyongyosi/path-linter/workflows/CI/badge.svg)
 
 [![unit test coverage lines](badges/coverage-unit/badge-lines.svg)]()
 [![unit test coverage functions](badges/coverage-unit/badge-functions.svg)]()
