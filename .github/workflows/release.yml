@@ -12,5 +12,12 @@ jobs:
     release:
         runs-on: ubuntu-latest
         steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+            - name: Install Dependencies
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12
+            - run: yarn install
             - name: Release new version
               run: yarn release ${{ github.event.inputs.type }}
