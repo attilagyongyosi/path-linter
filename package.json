@@ -17,11 +17,12 @@
         "test:integration": "yarn build && jest --runInBand -c jest.integration.config.js",
         "test:watch": "jest --runInBand --watchAll",
         "test": "yarn test:unit && yarn test:integration",
-        "test:badges:unit": "yarn jest-coverage-badges --input generated/jest-coverage/unit/coverage-summary.json --output badges/coverage-unit",
-        "release": "release-it"
+        "test:badges:unit": "yarn jest-coverage-badges --input generated/jest-coverage/unit/coverage-summary.json --output badges/coverage-unit"
     },
     "files": [
-        "lib"
+        "lib",
+        "CHANGELOG.md",
+        "package.json"
     ],
     "publishConfig": {
         "access": "public"
@@ -64,8 +65,14 @@
         "jest-coverage-badges": "1.1.2",
         "npm-check-updates": "9.1.0",
         "npm-run-all": "4.1.5",
-        "release-it": "14.2.0",
         "rimraf": "3.0.2",
+        "semantic-release": "17.2.1",
+        "@semantic-release/git": "9.0.0",
+        "@semantic-release/commit-analyzer": "8.0.1",
+        "@semantic-release/release-notes-generator": "9.0.1",
+        "@semantic-release/changelog": "5.0.1",
+        "@semantic-release/npm": "7.0.6",
+        "@semantic-release/github": "7.1.1",
         "ts-jest": "26.4.1",
         "tslib": "2.0.3",
         "typescript": "4.0.3"
