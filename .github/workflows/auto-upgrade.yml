@@ -18,6 +18,9 @@ jobs:
             - name: Log Package Version Status
               run: npm outdated
 
+            - name: Install Packages
+              run: yarn install
+
             - name: Update Dependencies
               run: yarn deps:update
 
