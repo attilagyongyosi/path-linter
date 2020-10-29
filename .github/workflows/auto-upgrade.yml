@@ -1,0 +1,36 @@
+name: Automatic Tech Upgrade
+
+on:
+    workflow_dispatch
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+
+            - name: Install Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 12
+
+            - name: Log Package Version Status
+              run: npm outdated
+
+            - name: Update Dependencies
+              run: yarn deps:update
+
+            - name: Install Updated Packages
+              run: yarn install
+
+            - name: Sanity Testing
+              run: yarn test:sanity
+
+            - name: Commit and Pus
+              uses: EndBug/add-and-commit@v5
+              with:
+                  - branch: master
+                  - message: 'ci: automatic package update commit'
+              env:
+                  - GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
