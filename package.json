@@ -2,7 +2,7 @@
     "name": "@attilagyongyosi/path-linter",
     "version": "2.1.4",
     "description": "Linter for consistent directory and file naming.",
-    "main": "index.js",
+    "main": "lib/index.js",
     "author": "attilagyongyosi <attilagyongyosi0@gmail.com>",
     "scripts": {
         "clean": "rimraf ./lib",
@@ -10,8 +10,7 @@
         "lint:ts": "eslint src/**/*.ts",
         "lint:paths": "path-linter --colorize",
         "lint": "run-p lint:*",
-        "copy": "copyfiles README.md LICENSE.md package.json ./lib",
-        "build": "yarn clean && esbuild --bundle --platform=node --minify --outdir=lib --target=node10 src/index.ts && add-shebang && yarn copy",
+        "build": "yarn clean && esbuild --bundle --platform=node --minify --outdir=lib --target=node10 src/index.ts && add-shebang",
         "test-run:default": "yarn build && node lib/index.js",
         "test-run": "yarn build && node lib/index.js --config sample-config.json",
         "test:unit": "jest --runInBand && yarn test:badges:unit",
@@ -22,9 +21,8 @@
         "test:sanity": "yarn clean && yarn lint && yarn test"
     },
     "files": [
-        "lib",
         "CHANGELOG.md",
-        "package.json"
+        "README.md"
     ],
     "publishConfig": {
         "access": "public"
@@ -60,7 +58,6 @@
         "@typescript-eslint/parser": "4.6.0",
         "@typescript-eslint/eslint-plugin": "4.6.0",
         "add-shebang": "0.1.0",
-        "copyfiles": "2.4.0",
         "esbuild": "0.7.21",
         "eslint": "7.12.0",
         "husky": "4.3.0",
