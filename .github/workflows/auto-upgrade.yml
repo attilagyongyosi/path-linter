@@ -30,7 +30,7 @@ jobs:
             - name: Commit and Pus
               uses: EndBug/add-and-commit@v5
               with:
-                  - branch: master
-                  - message: 'ci: automatic package update commit'
+                  branch: master
+                  message: 'ci: automatic package update commit'
               env:
-                  - GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
