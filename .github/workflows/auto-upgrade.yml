@@ -30,10 +30,12 @@ jobs:
             - name: Sanity Testing
               run: yarn test:sanity
 
-            - name: Commit and Pus
+            - name: Commit and Push
               uses: EndBug/add-and-commit@v5
               with:
                   branch: master
+                  author_name: attilagyongyosi
+                  author_email: attilagyongyosi0@gmail.com
                   message: 'ci: automatic package update commit'
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
