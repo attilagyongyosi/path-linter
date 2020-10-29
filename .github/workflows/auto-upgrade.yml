@@ -38,4 +38,4 @@ jobs:
                   author_email: attilagyongyosi0@gmail.com
                   message: 'ci: automatic package update commit'
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
