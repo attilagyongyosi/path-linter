@@ -1,0 +1,19 @@
+{
+    "overrides": {
+        "^@types/": {
+            "defer": "2020-01-01",
+            "drift": null,
+            "pulse": null,
+            "releases": null,
+            "major": null,
+            "minor": null,
+            "patch": null
+        }
+    },
+    "threshold": {
+        "drift": {
+            "collective": 10,
+            "individual": 1
+        }
+    }
+}
